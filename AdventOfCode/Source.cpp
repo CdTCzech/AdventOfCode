@@ -69,11 +69,37 @@ void day2part1()
 	std::cout << result << std::endl;
 }
 
+void day2part2()
+{
+	auto result = 0;
+
+	for (const auto& line : getLineByLine<int>("day2.txt", [](std::string& var)
+	{
+		std::vector<int> dimensions;
+		std::replace(var.begin(), var.end(), 'x', ' ');
+		std::istringstream iss(var);
+		int l, w, h;
+		iss >> l >> w >> h;
+		dimensions.push_back(l);
+		dimensions.push_back(w);
+		dimensions.push_back(h);
+		return dimensions;
+	}))
+	{
+		auto ribbon = (line[0] + line[1] + line[2] - std::max(line[0], std::max(line[1], line[2]))) * 2;
+		auto bow = line[0] * line[1] * line[2];
+		result += ribbon + bow;
+	}
+
+	std::cout << result << std::endl;
+}
+
 int main()
 {
 	std::cout << "Day1Part1: "; day1part1();
 	std::cout << "Day1Part2: "; day1part2();
 	std::cout << "Day2Part1: "; day2part1();
+	std::cout << "Day2Part2: "; day2part2();
 	system("pause");
 	return 0;
 }
