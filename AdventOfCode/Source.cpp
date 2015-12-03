@@ -136,6 +136,35 @@ namespace day3
 			std::cout << points.size() << std::endl;
 		}
 	}
+
+	void part2()
+	{
+		Point currentPositionSanta{ 0, 0 };
+		Point currentPositionRobo{ 0, 0 };
+		Point* current;
+		std::set<Point> points;
+
+		for (const auto& line : getLineByLine("day3.txt"))
+		{
+			bool isSantaTurn = true;
+			for (auto character : line)
+			{
+				if (isSantaTurn) current = &currentPositionSanta;
+				else current = &currentPositionRobo;
+
+				isSantaTurn = !isSantaTurn;
+
+				points.insert(*current);
+
+				if (character == '^') ++current->y;
+				else if (character == 'v') --current->y;
+				else if (character == '<') --current->x;
+				else if (character == '>') ++current->x;
+			}
+
+			std::cout << points.size() << std::endl;
+		}
+	}
 }
 
 int main()
@@ -145,6 +174,7 @@ int main()
 	std::cout << "Day2Part1: "; day2::part1();
 	std::cout << "Day2Part2: "; day2::part2();
 	std::cout << "Day3Part1: "; day3::part1();
+	std::cout << "Day3Part2: "; day3::part2();
 	system("pause");
 	return 0;
 }
