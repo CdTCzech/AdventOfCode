@@ -1,105 +1,150 @@
 #include <algorithm>
 #include <iostream>
+#include <set>
 #include <sstream>
 #include "FileReader.h"
 
 
-void day1part1()
+namespace day1
 {
-	for (const auto& line : getLineByLine("day1.txt"))
+	void part1()
 	{
-		int result = 0;
-
-		for (auto character : line)
+		for (const auto& line : getLineByLine("day1.txt"))
 		{
-			if (character == '(') ++result;
-			else --result;
+			int result = 0;
+
+			for (auto character : line)
+			{
+				if (character == '(') ++result;
+				else --result;
+			}
+
+			std::cout << result << std::endl;
+		}
+	}
+
+	void part2()
+	{
+		for (const auto& line : getLineByLine("day1.txt"))
+		{
+			int floor = 0, result = 0;
+
+			for (size_t i = 0; i < line.size(); ++i)
+			{
+				if (line[i] == '(') ++floor;
+				else --floor;
+
+				if (floor == -1)
+				{
+					result = i;
+					break;
+				}
+			}
+
+			std::cout << result + 1 << std::endl;
+		}
+	}
+}
+
+namespace day2
+{
+	void part1()
+	{
+		auto result = 0;
+
+		for (const auto& line : getLineByLine<int>("day2.txt", [](std::string& var)
+		{
+			std::vector<int> dimensions;
+			std::replace(var.begin(), var.end(), 'x', ' ');
+			std::istringstream iss(var);
+			int l, w, h;
+			iss >> l >> w >> h;
+			dimensions.push_back(l);
+			dimensions.push_back(w);
+			dimensions.push_back(h);
+			return dimensions;
+		}))
+		{
+			auto sideA = line[0] * line[1];
+			auto sideB = line[0] * line[2];
+			auto sideC = line[1] * line[2];
+			auto sideM = std::min(sideA, std::min(sideB, sideC));
+			result += 2 * sideA + 2 * sideB + 2 * sideC + sideM;
+		}
+
+		std::cout << result << std::endl;
+	}
+
+	void part2()
+	{
+		auto result = 0;
+
+		for (const auto& line : getLineByLine<int>("day2.txt", [](std::string& var)
+		{
+			std::vector<int> dimensions;
+			std::replace(var.begin(), var.end(), 'x', ' ');
+			std::istringstream iss(var);
+			int l, w, h;
+			iss >> l >> w >> h;
+			dimensions.push_back(l);
+			dimensions.push_back(w);
+			dimensions.push_back(h);
+			return dimensions;
+		}))
+		{
+			auto ribbon = (line[0] + line[1] + line[2] - std::max(line[0], std::max(line[1], line[2]))) * 2;
+			auto bow = line[0] * line[1] * line[2];
+			result += ribbon + bow;
 		}
 
 		std::cout << result << std::endl;
 	}
 }
 
-void day1part2()
+namespace day3
 {
-	for (const auto& line : getLineByLine("day1.txt"))
+	struct Point
 	{
-		int floor = 0, result = 0;
+		int x;
+		int y;
 
-		for (size_t i = 0; i < line.size(); ++i)
+		bool operator< (const Point& other) const
 		{
-			if (line[i] == '(') ++floor;
-			else --floor;
-
-			if (floor == -1)
-			{
-				result = i;
-				break;
-			}
+			if (x < other.x) return true;
+			if (x == other.x && y < other.y) return true;
+			return false;
 		}
+	};
 
-		std::cout << result + 1 << std::endl;
+	void part1()
+	{
+		Point currentPosition{ 0, 0 };
+		std::set<Point> points;
+
+		for (const auto& line : getLineByLine("day3.txt"))
+		{
+			for (auto character : line)
+			{
+				points.insert(currentPosition);
+
+				if (character == '^') ++currentPosition.y;
+				else if (character == 'v') --currentPosition.y;
+				else if (character == '<') --currentPosition.x;
+				else if (character == '>') ++currentPosition.x;
+			}
+
+			std::cout << points.size() << std::endl;
+		}
 	}
-}
-
-void day2part1()
-{
-	auto result = 0;
-
-	for (const auto& line : getLineByLine<int>("day2.txt", [](std::string& var)
-	{
-		std::vector<int> dimensions;
-		std::replace(var.begin(), var.end(), 'x', ' ');
-		std::istringstream iss(var);
-		int l, w, h;
-		iss >> l >> w >> h;
-		dimensions.push_back(l);
-		dimensions.push_back(w);
-		dimensions.push_back(h);
-		return dimensions;
-	}))
-	{
-		auto sideA = line[0] * line[1];
-		auto sideB = line[0] * line[2];
-		auto sideC = line[1] * line[2];
-		auto sideM = std::min(sideA, std::min(sideB, sideC));
-		result += 2 * sideA + 2 * sideB + 2 * sideC + sideM;
-	}
-
-	std::cout << result << std::endl;
-}
-
-void day2part2()
-{
-	auto result = 0;
-
-	for (const auto& line : getLineByLine<int>("day2.txt", [](std::string& var)
-	{
-		std::vector<int> dimensions;
-		std::replace(var.begin(), var.end(), 'x', ' ');
-		std::istringstream iss(var);
-		int l, w, h;
-		iss >> l >> w >> h;
-		dimensions.push_back(l);
-		dimensions.push_back(w);
-		dimensions.push_back(h);
-		return dimensions;
-	}))
-	{
-		auto ribbon = (line[0] + line[1] + line[2] - std::max(line[0], std::max(line[1], line[2]))) * 2;
-		auto bow = line[0] * line[1] * line[2];
-		result += ribbon + bow;
-	}
-
-	std::cout << result << std::endl;
 }
 
 int main()
 {
-	std::cout << "Day1Part1: "; day1part1();
-	std::cout << "Day1Part2: "; day1part2();
-	std::cout << "Day2Part1: "; day2part1();
-	std::cout << "Day2Part2: "; day2part2();
+	std::cout << "Day1Part1: "; day1::part1();
+	std::cout << "Day1Part2: "; day1::part2();
+	std::cout << "Day2Part1: "; day2::part1();
+	std::cout << "Day2Part2: "; day2::part2();
+	std::cout << "Day3Part1: "; day3::part1();
 	system("pause");
 	return 0;
 }
