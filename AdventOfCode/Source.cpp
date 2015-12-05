@@ -203,6 +203,43 @@ namespace day4
 	}
 }
 
+namespace day5
+{
+	void part1()
+	{
+		int result = 0;
+
+		for (const auto& line : getLineByLine("day5.txt"))
+		{
+			int vowels = 0;
+			bool twice = false;
+			bool banned = false;
+			char previous = '\0';
+
+			for (const auto& character : line)
+			{
+				if (character == 'a' || character == 'e' || character == 'i'
+					|| character == 'o' || character == 'u')
+					++vowels;
+
+				if (previous == character) twice = true;
+
+				if ((previous == 'a' && character == 'b') ||
+					(previous == 'c' && character == 'd') ||
+					(previous == 'p' && character == 'q') ||
+					(previous == 'x' && character == 'y'))
+					banned = true;
+
+				previous = character;
+			}
+
+			if (vowels >= 3 && twice && !banned) ++result;
+		}
+
+		std::cout << result << std::endl;
+	}
+}
+
 int main()
 {
 	std::cout << "Day1Part1: "; day1::part1();
@@ -213,6 +250,7 @@ int main()
 	std::cout << "Day3Part2: "; day3::part2();
 	std::cout << "Day4Part1: "; day4::part1();
 	std::cout << "Day4Part2: "; day4::part2();
+	std::cout << "Day5Part1: "; day5::part1();
 	system("pause");
 	return 0;
 }
