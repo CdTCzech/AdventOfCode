@@ -2,6 +2,8 @@
 #include <iostream>
 #include <set>
 #include <sstream>
+
+#include "Libraries/md5.h"
 #include "FileReader.h"
 
 
@@ -167,6 +169,25 @@ namespace day3
 	}
 }
 
+namespace day4
+{
+	void part1()
+	{
+		for (const auto& line : getLineByLine("day4.txt"))
+		{
+			for (unsigned int number = 0; number < 1000000; ++number)
+			{
+				auto hash = md5(line + std::to_string(number));
+				if (hash.substr(0, 5) == "00000")
+				{
+					std::cout << std::to_string(number) << std::endl;
+					break;
+				}
+			}
+		}
+	}
+}
+
 int main()
 {
 	std::cout << "Day1Part1: "; day1::part1();
@@ -175,6 +196,7 @@ int main()
 	std::cout << "Day2Part2: "; day2::part2();
 	std::cout << "Day3Part1: "; day3::part1();
 	std::cout << "Day3Part2: "; day3::part2();
+	std::cout << "Day4Part1: "; day4::part1();
 	system("pause");
 	return 0;
 }
