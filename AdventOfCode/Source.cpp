@@ -50,26 +50,29 @@ namespace day1
 
 namespace day2
 {
+	struct Dimensions
+	{
+		int l;
+		int w;
+		int h;
+	};
+
 	void part1()
 	{
 		auto result = 0;
 
-		for (const auto& line : getLineByLine<int>("day2.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [](std::string& var)
 		{
-			std::vector<int> dimensions;
 			std::replace(var.begin(), var.end(), 'x', ' ');
 			std::istringstream iss(var);
 			int l, w, h;
 			iss >> l >> w >> h;
-			dimensions.push_back(l);
-			dimensions.push_back(w);
-			dimensions.push_back(h);
-			return dimensions;
+			return Dimensions{ l, w, h };
 		}))
 		{
-			auto sideA = line[0] * line[1];
-			auto sideB = line[0] * line[2];
-			auto sideC = line[1] * line[2];
+			auto sideA = line.l * line.w;
+			auto sideB = line.l * line.h;
+			auto sideC = line.w * line.h;
 			auto sideM = std::min(sideA, std::min(sideB, sideC));
 			result += 2 * sideA + 2 * sideB + 2 * sideC + sideM;
 		}
@@ -81,21 +84,17 @@ namespace day2
 	{
 		auto result = 0;
 
-		for (const auto& line : getLineByLine<int>("day2.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [](std::string& var)
 		{
-			std::vector<int> dimensions;
 			std::replace(var.begin(), var.end(), 'x', ' ');
 			std::istringstream iss(var);
 			int l, w, h;
 			iss >> l >> w >> h;
-			dimensions.push_back(l);
-			dimensions.push_back(w);
-			dimensions.push_back(h);
-			return dimensions;
+			return Dimensions{ l, w, h };
 		}))
 		{
-			auto ribbon = (line[0] + line[1] + line[2] - std::max(line[0], std::max(line[1], line[2]))) * 2;
-			auto bow = line[0] * line[1] * line[2];
+			auto ribbon = (line.l + line.w + line.h - std::max(line.l, std::max(line.w, line.h))) * 2;
+			auto bow = line.l * line.w * line.h;
 			result += ribbon + bow;
 		}
 

@@ -4,12 +4,11 @@
 #include <fstream>
 #include <functional>
 #include <string>
-#include <vector>
 
 
-template <typename T>
-std::experimental::generator<std::vector<T>> getLineByLine(std::string filename,
-	std::function<std::vector<T>(std::string&)> func = [](std::string& var) { return std::vector<T>(); })
+template <typename T = std::string>
+std::experimental::generator<T> getLineByLine(std::string filename,
+	std::function<T(std::string&)> func = [] (std::string& var) { return var; } )
 {
 	std::ifstream infile(filename);
 	std::string line;
@@ -17,16 +16,5 @@ std::experimental::generator<std::vector<T>> getLineByLine(std::string filename,
 	while (getline(infile, line))
 	{
 		yield func(line);
-	}
-}
-
-auto getLineByLine(std::string filename)
-{
-	std::ifstream infile(filename);
-	std::string line;
-
-	while (getline(infile, line))
-	{
-		yield line;
 	}
 }
