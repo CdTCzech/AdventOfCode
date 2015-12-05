@@ -186,6 +186,22 @@ namespace day4
 			}
 		}
 	}
+
+	void part2()
+	{
+		for (const auto& line : getLineByLine("day4.txt"))
+		{
+			for (unsigned int number = 282749; number < 10000000; ++number)
+			{
+				auto hash = md5(line + std::to_string(number));
+				if (hash.substr(0, 6) == "000000")
+				{
+					std::cout << std::to_string(number) << std::endl;
+					break;
+				}
+			}
+		}
+	}
 }
 
 int main()
@@ -197,6 +213,7 @@ int main()
 	std::cout << "Day3Part1: "; day3::part1();
 	std::cout << "Day3Part2: "; day3::part2();
 	std::cout << "Day4Part1: "; day4::part1();
+	std::cout << "Day4Part2: "; day4::part2();
 	system("pause");
 	return 0;
 }
