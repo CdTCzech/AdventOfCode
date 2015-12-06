@@ -2,6 +2,7 @@
 #include <iostream>
 #include <set>
 #include <sstream>
+#include <vector>
 
 #include "Libraries/md5.h"
 #include "FileReader.h"
@@ -281,6 +282,69 @@ namespace day5
 	}
 }
 
+namespace day6
+{
+	enum class Type
+	{
+		on,
+		off,
+		toggle
+	};
+
+	struct Command
+	{
+		day3::Point start;
+		day3::Point end;
+		Type type;
+	};
+
+	void part1()
+	{
+		std::vector<std::vector<bool>> grid(1000, std::vector<bool>(1000, false));
+		unsigned int result = 0;
+
+		for (const auto& line : getLineByLine<Command>("day6.txt", [] (std::string& var)
+		{
+			std::replace(var.begin(), var.end(), ',', ' ');
+			std::istringstream iss(var);
+			std::string buffer;
+			Command command;
+			if (var[1] == 'o')
+			{
+				command.type = Type::toggle;
+				iss >> buffer >> command.start.x >> command.start.y >> buffer >> command.end.x >> command.end.y;
+			}
+			else
+			{
+				command.type = (var[6] == 'f') ? Type::off : Type::on;
+				iss >> buffer >> buffer >> command.start.x >> command.start.y >> buffer >> command.end.x >> command.end.y;
+			}
+			return command;
+		}))
+		{
+			for (auto y = line.start.y; y <= line.end.y; ++y)
+			{
+				for (auto x = line.start.x; x <= line.end.x; ++x)
+				{
+					if (line.type == Type::toggle) grid[y][x] = !grid[y][x];
+					else if (line.type == Type::off) grid[y][x] = false;
+					else grid[y][x] = true;
+				}
+			}
+		}
+
+		for (const auto y : grid)
+		{
+			for (const auto x : y)
+			{
+				if (x == true) ++result;
+			}
+		}
+
+		std::cout << result << std::endl;
+	}
+}
+
 int main()
 {
 	std::cout << "Day1Part1: "; day1::part1();
@@ -293,6 +357,7 @@ int main()
 	std::cout << "Day4Part2: "; day4::part2();
 	std::cout << "Day5Part1: "; day5::part1();
 	std::cout << "Day5Part2: "; day5::part2();
+	std::cout << "Day6Part1: "; day6::part1();
 	system("pause");
 	return 0;
 }
