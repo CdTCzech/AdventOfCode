@@ -238,6 +238,47 @@ namespace day5
 
 		std::cout << result << std::endl;
 	}
+
+	void part2()
+	{
+		int result = 0;
+
+		for (const auto& line : getLineByLine("day5.txt"))
+		{
+			bool pair = false;
+			bool between = false;
+
+			for (unsigned int i = 0; i < line.size() - 2; ++i)
+			{
+				if (line[i] == line[i + 2])
+				{
+					between = true;
+					break;
+				}
+			}
+
+			for (unsigned int i = 0; i < line.size() - 3; ++i)
+			{
+				bool end = false;
+
+				for (auto j = i + 2; j < line.size() - 1; ++j)
+				{
+					if (line[i] == line[j] && line[i + 1] == line[j + 1])
+					{
+						pair = true;
+						end = true;
+						break;
+					}
+				}
+
+				if (end == true) break;
+			}
+
+			if (pair && between) ++result;
+		}
+
+		std::cout << result << std::endl;
+	}
 }
 
 int main()
@@ -251,6 +292,8 @@ int main()
 	std::cout << "Day4Part1: "; day4::part1();
 	std::cout << "Day4Part2: "; day4::part2();
 	std::cout << "Day5Part1: "; day5::part1();
+	std::cout << "Day5Part2: "; day5::part2();
 	system("pause");
 	return 0;
 }
+ 
