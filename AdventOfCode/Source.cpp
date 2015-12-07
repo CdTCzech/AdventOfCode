@@ -399,6 +399,7 @@ namespace day6
 
 namespace day7
 {
+	std::map<std::string, std::vector<std::string>> instructions;
 	std::map<std::string, unsigned short> results;
 
 	inline bool isNumber(const std::string& toCheck)
@@ -406,7 +407,7 @@ namespace day7
 		return std::find_if(toCheck.begin(), toCheck.end(), [](char c) { return !std::isdigit(c, std::locale()); }) == toCheck.end();
 	}
 
-	unsigned short getResult(const std::string& key, std::map<std::string, std::vector<std::string>>& instructions)
+	unsigned short getResult(const std::string& key)
 	{
 		if (results.find(key) != results.end()) return results.at(key);
 
@@ -416,20 +417,20 @@ namespace day7
 
 		if (tokens.size() == 1)
 		{
-			results.insert({ key, getResult(tokens[0], instructions) });
+			results.insert({ key, getResult(tokens[0]) });
 			return results.at(key);
 		}
 		if (tokens.size() == 2)
 		{
-			results.insert({ key, ~getResult(tokens[1], instructions) });
+			results.insert({ key, ~getResult(tokens[1]) });
 			return results.at(key);
 		}
 		else
 		{
-			if (tokens[1][0] == 'A') results.insert({ key, getResult(tokens[0], instructions) & getResult(tokens[2], instructions) });
-			else if (tokens[1][0] == 'O') results.insert({ key, getResult(tokens[0], instructions) | getResult(tokens[2], instructions) });
-			else if (tokens[1][0] == 'L') results.insert({ key, getResult(tokens[0], instructions) << getResult(tokens[2], instructions) });
-			else if (tokens[1][0] == 'R') results.insert({ key, getResult(tokens[0], instructions) >> getResult(tokens[2], instructions) });
+			if (tokens[1][0] == 'A') results.insert({ key, getResult(tokens[0]) & getResult(tokens[2]) });
+			else if (tokens[1][0] == 'O') results.insert({ key, getResult(tokens[0]) | getResult(tokens[2]) });
+			else if (tokens[1][0] == 'L') results.insert({ key, getResult(tokens[0]) << getResult(tokens[2]) });
+			else if (tokens[1][0] == 'R') results.insert({ key, getResult(tokens[0]) >> getResult(tokens[2]) });
 			return results.at(key);
 		}
 
@@ -438,8 +439,6 @@ namespace day7
 
 	void part1()
 	{
-		std::map<std::string, std::vector<std::string>> instructions;
-
 		for (const auto& line : getLineByLine<std::vector<std::string>>("day7.txt", [] (std::string& var)
 		{
 			std::istringstream iss(var);
@@ -449,7 +448,32 @@ namespace day7
 			instructions.insert({ line.back(),{ line.begin(), line.end() - 2 } });
 		}
 
-		std::cout << getResult("a", instructions) << std::endl;
+		std::cout << getResult("a") << std::endl;
+
+		instructions.clear();
+		results.clear();
+	}
+
+	void part2()
+	{
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day7.txt", [](std::string& var)
+		{
+			std::istringstream iss(var);
+			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
+		}))
+		{
+			instructions.insert({ line.back(),{ line.begin(), line.end() - 2 } });
+		}
+
+		auto part1Result = getResult("a");
+		results.clear();
+
+		instructions.at("b").clear();
+		instructions.at("b").push_back(std::to_string(part1Result));
+		std::cout << getResult("a") << std::endl;
+
+		instructions.clear();
+		results.clear();
 	}
 }
 
@@ -468,6 +492,7 @@ int main()
 	std::cout << "Day6Part1: "; day6::part1();
 	std::cout << "Day6Part2: "; day6::part2();
 	std::cout << "Day7Part1: "; day7::part1();
+	std::cout << "Day7Part2: "; day7::part2();
 	system("pause");
 	return 0;
 }
