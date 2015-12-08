@@ -502,6 +502,23 @@ namespace day8
 
 		std::cout << result << std::endl;
 	}
+
+	void part2()
+	{
+		unsigned int result = 0;
+
+		for (const auto& line : getLineByLine("day8.txt"))
+		{
+			result += 2;
+
+			for (const auto character : line)
+			{
+				if (character == '\\' || character == '\"') result += 1;
+			}
+		}
+
+		std::cout << result << std::endl;
+	}
 }
 
 int main()
@@ -521,6 +538,7 @@ int main()
 	std::cout << "Day 7 Part 1: "; day7::part1();
 	std::cout << "Day 7 Part 2: "; day7::part2();
 	std::cout << "Day 8 Part 1: "; day8::part1();
+	std::cout << "Day 8 Part 2: "; day8::part2();
 	system("pause");
 	return 0;
 }
