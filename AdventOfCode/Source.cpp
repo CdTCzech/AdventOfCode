@@ -477,22 +477,50 @@ namespace day7
 	}
 }
 
+namespace day8
+{
+	void part1()
+	{
+		unsigned int result = 0;
+
+		for (const auto& line : getLineByLine("day8.txt"))
+		{
+			result += line.size();
+
+			for (size_t index = 0; index < line.size(); ++index)
+			{
+				if (line[index] == '\\')
+				{
+					if (line[index + 1] == 'x') index += 3;
+					else index += 1;
+				}
+				else if (line[index] == '\"') result += 1;
+
+				result -= 1;
+			}
+		}
+
+		std::cout << result << std::endl;
+	}
+}
+
 int main()
 {
-	std::cout << "Day1Part1: "; day1::part1();
-	std::cout << "Day1Part2: "; day1::part2();
-	std::cout << "Day2Part1: "; day2::part1();
-	std::cout << "Day2Part2: "; day2::part2();
-	std::cout << "Day3Part1: "; day3::part1();
-	std::cout << "Day3Part2: "; day3::part2();
-	std::cout << "Day4Part1: "; day4::part1();
-	std::cout << "Day4Part2: "; day4::part2();
-	std::cout << "Day5Part1: "; day5::part1();
-	std::cout << "Day5Part2: "; day5::part2();
-	std::cout << "Day6Part1: "; day6::part1();
-	std::cout << "Day6Part2: "; day6::part2();
-	std::cout << "Day7Part1: "; day7::part1();
-	std::cout << "Day7Part2: "; day7::part2();
+	std::cout << "Day 1 Part 1: "; day1::part1();
+	std::cout << "Day 1 Part 2: "; day1::part2();
+	std::cout << "Day 2 Part 1: "; day2::part1();
+	std::cout << "Day 2 Part 2: "; day2::part2();
+	std::cout << "Day 3 Part 1: "; day3::part1();
+	std::cout << "Day 3 Part 2: "; day3::part2();
+	std::cout << "Day 4 Part 1: "; day4::part1();
+	std::cout << "Day 4 Part 2: "; day4::part2();
+	std::cout << "Day 5 Part 1: "; day5::part1();
+	std::cout << "Day 5 Part 2: "; day5::part2();
+	std::cout << "Day 6 Part 1: "; day6::part1();
+	std::cout << "Day 6 Part 2: "; day6::part2();
+	std::cout << "Day 7 Part 1: "; day7::part1();
+	std::cout << "Day 7 Part 2: "; day7::part2();
+	std::cout << "Day 8 Part 1: "; day8::part1();
 	system("pause");
 	return 0;
 }
