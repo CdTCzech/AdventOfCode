@@ -698,6 +698,31 @@ namespace day11
 	}
 }
 
+namespace day12
+{
+	void part1()
+	{
+		const auto& line = getLine("day12.txt");
+
+		int result = 0;
+		std::string buffer;
+
+		for (const auto character : line)
+		{
+			if (character == '-' && buffer.empty()) buffer += character;
+			else if (character >= '0' && character <= '9') buffer += character;
+			else if (!buffer.empty())
+			{
+				result += std::stoi(buffer);
+				buffer.clear();
+			}
+			else buffer.clear();
+		}
+
+		std::cout << result << std::endl;
+	}
+}
+
 int main()
 {
 	std::cout << "Day 1 Part 1: "; day1::part1();
@@ -720,6 +745,7 @@ int main()
 	std::cout << "Day 10 Part 2: "; day10::part2();
 	std::cout << "Day 11 Part 1: "; day11::part1();
 	std::cout << "Day 11 Part 2: "; day11::part2();
+	std::cout << "Day 12 Part 1: "; day12::part1();
 	system("pause");
 	return 0;
 }
