@@ -542,6 +542,38 @@ namespace day10
 
 		std::cout << result.size() << std::endl;
 	}
+
+	void part2()
+	{
+		const auto& line = getLine("day10.txt");
+		std::string temp = line;
+		std::string result;
+
+		for (unsigned int iteration = 0; iteration < 50; ++iteration)
+		{
+			unsigned int count = 1;
+			char last = temp[0];
+			result.clear();
+
+			for (size_t index = 1; index < temp.size(); ++index)
+			{
+				if (temp[index] != last)
+				{
+					result += std::to_string(count);
+					result += last;
+					count = 1;
+					last = temp[index];
+				}
+				else ++count;
+			}
+
+			result += std::to_string(count);
+			result += last;
+			temp = result;
+		}
+
+		std::cout << result.size() << std::endl;
+	}
 }
 
 int main()
@@ -563,6 +595,7 @@ int main()
 	std::cout << "Day 8 Part 1: "; day8::part1();
 	std::cout << "Day 8 Part 2: "; day8::part2();
 	std::cout << "Day 10 Part 1: "; day10::part1();
+	std::cout << "Day 10 Part 2: "; day10::part2();
 	system("pause");
 	return 0;
 }
