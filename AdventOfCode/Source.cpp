@@ -576,6 +576,75 @@ namespace day10
 	}
 }
 
+namespace day11
+{
+	void increaseString(std::string& line, size_t index)
+	{
+		if (line[index] != 'z')
+		{
+			++line[index];
+		}
+		else
+		{
+			line[index] = 'a';
+			increaseString(line, index - 1);
+		}
+	}
+
+	void part1()
+	{
+		auto& line = getLine("day11.txt");
+
+		bool increasing = false;
+		bool banned = false;
+		bool pairs = false;
+
+		while (!increasing || !banned || !pairs)
+		{
+			increasing = false;
+			banned = false;
+			pairs = false;
+
+			increaseString(line, line.size() - 1);
+
+			for (size_t index = 0; index < line.size() - 2; ++index)
+			{
+				if (line[index] + 1 == line[index + 1] &&
+					line[index] + 2 == line[index + 2])
+				{
+					increasing = true;
+					break;
+				}
+			}
+
+			if (line.find_first_of("iol") == std::string::npos) banned = true;
+
+			bool first = true;
+			char temp = ' ';
+
+			for (size_t index = 0; index < line.size() - 1; ++index)
+			{
+				if (line[index] == line[index + 1])
+				{
+					if (first)
+					{
+						first = false;
+						temp = line[index];
+						++index;
+					}
+					else if (line[index] != temp)
+					{
+						pairs = true;
+						break;
+					}
+				}
+			}
+		}
+
+		std::cout << line << std::endl;
+	}
+}
+
 int main()
 {
 	std::cout << "Day 1 Part 1: "; day1::part1();
@@ -596,6 +665,7 @@ int main()
 	std::cout << "Day 8 Part 2: "; day8::part2();
 	std::cout << "Day 10 Part 1: "; day10::part1();
 	std::cout << "Day 10 Part 2: "; day10::part2();
+	std::cout << "Day 11 Part 1: "; day11::part1();
 	system("pause");
 	return 0;
 }
