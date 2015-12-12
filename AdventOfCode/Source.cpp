@@ -15,40 +15,36 @@ namespace day1
 {
 	void part1()
 	{
-		for (const auto& line : getLineByLine("day1.txt"))
+		const auto& line = getLine("day1.txt");
+		int result = 0;
+
+		for (auto character : line)
 		{
-			int result = 0;
-
-			for (auto character : line)
-			{
-				if (character == '(') ++result;
-				else --result;
-			}
-
-			std::cout << result << std::endl;
+			if (character == '(') ++result;
+			else --result;
 		}
+
+		std::cout << result << std::endl;
 	}
 
 	void part2()
 	{
-		for (const auto& line : getLineByLine("day1.txt"))
+		const auto& line = getLine("day1.txt");
+		int floor = 0, result = 0;
+
+		for (size_t i = 0; i < line.size(); ++i)
 		{
-			int floor = 0, result = 0;
+			if (line[i] == '(') ++floor;
+			else --floor;
 
-			for (size_t i = 0; i < line.size(); ++i)
+			if (floor == -1)
 			{
-				if (line[i] == '(') ++floor;
-				else --floor;
-
-				if (floor == -1)
-				{
-					result = i;
-					break;
-				}
+				result = i;
+				break;
 			}
-
-			std::cout << result + 1 << std::endl;
 		}
+
+		std::cout << result + 1 << std::endl;
 	}
 }
 
@@ -65,7 +61,7 @@ namespace day2
 	{
 		auto result = 0;
 
-		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [&result](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), 'x', ' ');
 			std::istringstream iss(var);
@@ -88,7 +84,7 @@ namespace day2
 	{
 		auto result = 0;
 
-		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [&result](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), 'x', ' ');
 			std::istringstream iss(var);
@@ -126,20 +122,18 @@ namespace day3
 		Point currentPosition{ 0, 0 };
 		std::set<Point> points;
 
-		for (const auto& line : getLineByLine("day3.txt"))
+		const auto& line = getLine("day3.txt");
+		for (auto character : line)
 		{
-			for (auto character : line)
-			{
-				points.insert(currentPosition);
+			points.insert(currentPosition);
 
-				if (character == '^') ++currentPosition.y;
-				else if (character == 'v') --currentPosition.y;
-				else if (character == '<') --currentPosition.x;
-				else if (character == '>') ++currentPosition.x;
-			}
-
-			std::cout << points.size() << std::endl;
+			if (character == '^') ++currentPosition.y;
+			else if (character == 'v') --currentPosition.y;
+			else if (character == '<') --currentPosition.x;
+			else if (character == '>') ++currentPosition.x;
 		}
+
+		std::cout << points.size() << std::endl;
 	}
 
 	void part2()
@@ -149,26 +143,24 @@ namespace day3
 		Point* current;
 		std::set<Point> points;
 
-		for (const auto& line : getLineByLine("day3.txt"))
+		const auto& line = getLine("day3.txt");
+		bool isSantaTurn = true;
+		for (auto character : line)
 		{
-			bool isSantaTurn = true;
-			for (auto character : line)
-			{
-				if (isSantaTurn) current = &currentPositionSanta;
-				else current = &currentPositionRobo;
+			if (isSantaTurn) current = &currentPositionSanta;
+			else current = &currentPositionRobo;
 
-				isSantaTurn = !isSantaTurn;
+			isSantaTurn = !isSantaTurn;
 
-				points.insert(*current);
+			points.insert(*current);
 
-				if (character == '^') ++current->y;
-				else if (character == 'v') --current->y;
-				else if (character == '<') --current->x;
-				else if (character == '>') ++current->x;
-			}
-
-			std::cout << points.size() << std::endl;
+			if (character == '^') ++current->y;
+			else if (character == 'v') --current->y;
+			else if (character == '<') --current->x;
+			else if (character == '>') ++current->x;
 		}
+
+		std::cout << points.size() << std::endl;
 	}
 }
 
@@ -176,32 +168,28 @@ namespace day4
 {
 	void part1()
 	{
-		for (const auto& line : getLineByLine("day4.txt"))
+		const auto& line = getLine("day4.txt");
+		for (unsigned int number = 0; number < 1000000; ++number)
 		{
-			for (unsigned int number = 0; number < 1000000; ++number)
+			auto hash = md5(line + std::to_string(number));
+			if (hash.substr(0, 5) == "00000")
 			{
-				auto hash = md5(line + std::to_string(number));
-				if (hash.substr(0, 5) == "00000")
-				{
-					std::cout << std::to_string(number) << std::endl;
-					break;
-				}
+				std::cout << std::to_string(number) << std::endl;
+				break;
 			}
 		}
 	}
 
 	void part2()
 	{
-		for (const auto& line : getLineByLine("day4.txt"))
+		const auto& line = getLine("day4.txt");
+		for (unsigned int number = 282749; number < 10000000; ++number)
 		{
-			for (unsigned int number = 282749; number < 10000000; ++number)
+			auto hash = md5(line + std::to_string(number));
+			if (hash.substr(0, 6) == "000000")
 			{
-				auto hash = md5(line + std::to_string(number));
-				if (hash.substr(0, 6) == "000000")
-				{
-					std::cout << std::to_string(number) << std::endl;
-					break;
-				}
+				std::cout << std::to_string(number) << std::endl;
+				break;
 			}
 		}
 	}
@@ -213,7 +201,7 @@ namespace day5
 	{
 		int result = 0;
 
-		for (const auto& line : getLineByLine("day5.txt"))
+		for (const auto& line : getLineByLine<std::string>("day5.txt", [&result](std::string& var) { return var; }))
 		{
 			int vowels = 0;
 			bool twice = false;
@@ -247,7 +235,7 @@ namespace day5
 	{
 		int result = 0;
 
-		for (const auto& line : getLineByLine("day5.txt"))
+		for (const auto& line : getLineByLine<std::string>("day5.txt", [&result](std::string& var) { return var; }))
 		{
 			bool pair = false;
 			bool between = false;
@@ -306,7 +294,7 @@ namespace day6
 		std::vector<std::vector<bool>> grid(1000, std::vector<bool>(1000, false));
 		unsigned int result = 0;
 
-		for (const auto& line : getLineByLine<Command>("day6.txt", [] (std::string& var)
+		for (const auto& line : getLineByLine<Command>("day6.txt", [&grid](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);
@@ -352,7 +340,7 @@ namespace day6
 		std::vector<std::vector<int>> grid(1000, std::vector<int>(1000, 0));
 		unsigned int result = 0;
 
-		for (const auto& line : getLineByLine<Command>("day6.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Command>("day6.txt", [&grid](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);
@@ -483,7 +471,7 @@ namespace day8
 	{
 		unsigned int result = 0;
 
-		for (const auto& line : getLineByLine("day8.txt"))
+		for (const auto& line : getLineByLine<std::string>("day8.txt", [&result](std::string& var) { return var; }))
 		{
 			result += line.size();
 
@@ -507,7 +495,7 @@ namespace day8
 	{
 		unsigned int result = 0;
 
-		for (const auto& line : getLineByLine("day8.txt"))
+		for (const auto& line : getLineByLine<std::string>("day8.txt", [&result](std::string& var) { return var; }))
 		{
 			result += 2;
 
