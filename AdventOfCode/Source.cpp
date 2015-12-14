@@ -413,16 +413,12 @@ namespace day7
 			results.insert({ key, ~getResult(tokens[1]) });
 			return results.at(key);
 		}
-		else
-		{
-			if (tokens[1][0] == 'A') results.insert({ key, getResult(tokens[0]) & getResult(tokens[2]) });
-			else if (tokens[1][0] == 'O') results.insert({ key, getResult(tokens[0]) | getResult(tokens[2]) });
-			else if (tokens[1][0] == 'L') results.insert({ key, getResult(tokens[0]) << getResult(tokens[2]) });
-			else if (tokens[1][0] == 'R') results.insert({ key, getResult(tokens[0]) >> getResult(tokens[2]) });
-			return results.at(key);
-		}
-
-		return 0;
+		
+		if (tokens[1][0] == 'A') results.insert({ key, getResult(tokens[0]) & getResult(tokens[2]) });
+		else if (tokens[1][0] == 'O') results.insert({ key, getResult(tokens[0]) | getResult(tokens[2]) });
+		else if (tokens[1][0] == 'L') results.insert({ key, getResult(tokens[0]) << getResult(tokens[2]) });
+		else if (tokens[1][0] == 'R') results.insert({ key, getResult(tokens[0]) >> getResult(tokens[2]) });
+		return results.at(key);
 	}
 
 	void part1()
@@ -787,6 +783,42 @@ namespace day12
 	}
 }
 
+namespace day14
+{
+	struct ReindeerStats
+	{
+		int speed;
+		int flyTime;
+		int restTime;
+	};
+
+	void part1()
+	{
+		int time = 2503;
+		int maximal = 0;
+
+		for (const auto& line : getLineByLine<ReindeerStats>("day14.txt", [&time, &maximal](std::string& var)
+		{
+			std::istringstream iss(var);
+			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
+			return ReindeerStats{std::stoi(splitted[3]), std::stoi(splitted[6]), std::stoi(splitted[13])};
+		}))
+		{
+			int distance = 0;
+
+			int full = time / (line.flyTime + line.restTime);
+			int half = time - (full * (line.flyTime + line.restTime));
+			if (half >= line.flyTime) distance += line.speed * line.flyTime;
+			else distance = half * line.speed;
+			distance += full * line.speed * line.flyTime;
+
+			if (distance > maximal) maximal = distance;
+		}
+
+		std::cout << maximal << std::endl;
+	}
+}
+
 int main()
 {
 	std::cout << "Day 1 Part 1: "; day1::part1();
@@ -811,6 +843,7 @@ int main()
 	std::cout << "Day 11 Part 2: "; day11::part2();
 	std::cout << "Day 12 Part 1: "; day12::part1();
 	std::cout << "Day 12 Part 2: "; day12::part2();
+	std::cout << "Day 14 Part 1: "; day14::part1();
 	system("pause");
 	return 0;
 }
