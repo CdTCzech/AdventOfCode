@@ -862,6 +862,59 @@ namespace day14
 	}
 }
 
+namespace day15
+{
+	struct Cookie
+	{
+		int capacity;
+		int durability;
+		int flavor;
+		int texture;
+		int calories;
+	};
+
+	void part1()
+	{
+		std::vector<Cookie> cookies;
+		unsigned long long int result = 0;
+
+		for (const auto& line : getLineByLine<Cookie>("day15.txt", [&cookies](std::string& var)
+		{
+			std::replace(var.begin(), var.end(), ',', ' ');
+			std::istringstream iss(var);
+			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
+			return Cookie{ std::stoi(splitted[2]), std::stoi(splitted[4]), std::stoi(splitted[6]), std::stoi(splitted[8]), std::stoi(splitted[10]) };
+		}))
+		{
+			cookies.push_back(line);
+		}
+
+		for (int i = 1; i <= 100; ++i)
+		{
+			for (int j = 1; j <= 100 - i; ++j)
+			{
+				for (int k = 1; k <= 100 - i - j; ++k)
+				{
+					int l = 100 - i - j - k;
+
+					long long int capacity = i * cookies[0].capacity + j * cookies[1].capacity + k * cookies[2].capacity + l * cookies[3].capacity;
+					long long int durability = i * cookies[0].durability + j * cookies[1].durability + k * cookies[2].durability + l * cookies[3].durability;
+					long long int flavor = i * cookies[0].flavor + j * cookies[1].flavor + k * cookies[2].flavor + l * cookies[3].flavor;
+					long long int texture = i * cookies[0].texture + j * cookies[1].texture + k * cookies[2].texture + l * cookies[3].texture;
+
+					if (capacity <= 0 || durability <= 0 || flavor <= 0 || texture <= 0) continue;
+
+					unsigned long long int score = capacity * durability * flavor * texture;
+
+					if (score > result) result = score;
+				}
+			}
+		}
+
+		std::cout << result << std::endl;
+	}
+}
+
 int main()
 {
 	std::cout << "Day 1 Part 1: "; day1::part1();
@@ -888,6 +941,7 @@ int main()
 	std::cout << "Day 12 Part 2: "; day12::part2();
 	std::cout << "Day 14 Part 1: "; day14::part1();
 	std::cout << "Day 14 Part 2: "; day14::part2();
+	std::cout << "Day 15 Part 1: "; day15::part1();
 	system("pause");
 	return 0;
 }
