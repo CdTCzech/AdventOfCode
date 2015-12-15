@@ -547,6 +547,41 @@ namespace day9
 
 		std::cout << result << std::endl;
 	}
+
+	void part2()
+	{
+		std::map<std::string, std::shared_ptr<City>> cities;
+		unsigned int result = 0;
+
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [&cities](std::string& var)
+		{
+			std::istringstream iss(var);
+			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
+		}))
+		{
+			if (cities.find(line[0]) == cities.end()) cities.insert({ line[0], std::make_shared<City>(City{ line[0],{} }) });
+			if (cities.find(line[2]) == cities.end()) cities.insert({ line[2], std::make_shared<City>(City{ line[2],{} }) });
+
+			cities.at(line[0])->neighbours.insert({ line[2], static_cast<unsigned int>(std::stoi(line[4])) });
+			cities.at(line[2])->neighbours.insert({ line[0], static_cast<unsigned int>(std::stoi(line[4])) });
+		}
+
+		std::vector<std::string> unique;
+		for (auto& city : cities) unique.push_back(city.first);
+		std::sort(unique.begin(), unique.end());
+
+		do {
+			unsigned int sum = 0;
+			for (size_t i = 0; i < unique.size() - 1; ++i)
+			{
+				sum += cities[unique[i]]->neighbours[unique[i + 1]];
+			}
+
+			if (sum > result) result = sum;
+		} while (std::next_permutation(unique.begin(), unique.end()));
+
+		std::cout << result << std::endl;
+	}
 }
 
 namespace day10
@@ -1020,6 +1055,7 @@ int main()
 	std::cout << "Day 8 Part 1: "; day8::part1();
 	std::cout << "Day 8 Part 2: "; day8::part2();
 	std::cout << "Day 9 Part 1: "; day9::part1();
+	std::cout << "Day 9 Part 2: "; day9::part2();
 	std::cout << "Day 10 Part 1: "; day10::part1();
 	std::cout << "Day 10 Part 2: "; day10::part2();
 	std::cout << "Day 11 Part 1: "; day11::part1();
