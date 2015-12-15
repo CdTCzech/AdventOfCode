@@ -790,6 +790,10 @@ namespace day14
 		int speed;
 		int flyTime;
 		int restTime;
+		bool phase;
+		int secondsRemaining;
+		int distance;
+		int points;
 	};
 
 	void part1()
@@ -816,6 +820,45 @@ namespace day14
 		}
 
 		std::cout << maximal << std::endl;
+	}
+
+	void part2()
+	{
+		std::vector<ReindeerStats> reindeers;
+
+		for (const auto& line : getLineByLine<ReindeerStats>("day14.txt", [&reindeers](std::string& var)
+		{
+			std::istringstream iss(var);
+			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
+			return ReindeerStats{ std::stoi(splitted[3]), std::stoi(splitted[6]), std::stoi(splitted[13]), true, std::stoi(splitted[6]), 0, 0 };
+		}))
+		{
+			reindeers.push_back(line);
+		}
+
+		for (size_t iteration = 0; iteration < 2503; ++iteration)
+		{
+			for (auto& reindeer : reindeers)
+			{
+				if (reindeer.phase) reindeer.distance += reindeer.speed;
+				--reindeer.secondsRemaining;
+				if (reindeer.secondsRemaining == 0)
+				{
+					if (reindeer.phase) reindeer.secondsRemaining = reindeer.restTime;
+					else reindeer.secondsRemaining = reindeer.flyTime;
+					reindeer.phase = !reindeer.phase;
+				}
+			}
+
+			int maximum = 0;
+			for (auto& reindeer : reindeers) if (reindeer.distance > maximum) maximum = reindeer.distance;
+			for (auto& reindeer : reindeers) if (reindeer.distance == maximum) ++reindeer.points;
+		}
+
+		int maximum = 0;
+		for (auto& reindeer : reindeers) if (reindeer.points > maximum) maximum = reindeer.points;
+
+		std::cout << maximum << std::endl;
 	}
 }
 
@@ -844,6 +887,7 @@ int main()
 	std::cout << "Day 12 Part 1: "; day12::part1();
 	std::cout << "Day 12 Part 2: "; day12::part2();
 	std::cout << "Day 14 Part 1: "; day14::part1();
+	std::cout << "Day 14 Part 2: "; day14::part2();
 	system("pause");
 	return 0;
 }
