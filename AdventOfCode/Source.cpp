@@ -515,7 +515,7 @@ namespace day9
 
 	void part1()
 	{
-		std::map<std::string, std::shared_ptr<City>> cities;
+		std::map<std::string, City> cities;
 		unsigned int result = 4294967295;
 
 		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [&cities](std::string& var)
@@ -524,11 +524,11 @@ namespace day9
 			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
 		}))
 		{
-			if (cities.find(line[0]) == cities.end()) cities.insert({ line[0], std::make_shared<City>(City{ line[0],{} }) });
-			if (cities.find(line[2]) == cities.end()) cities.insert({ line[2], std::make_shared<City>(City{ line[2],{} }) });
+			if (cities.find(line[0]) == cities.end()) cities.insert({ line[0], City{ line[0], {} } });
+			if (cities.find(line[2]) == cities.end()) cities.insert({ line[2], City{ line[2], {} } });
 
-			cities.at(line[0])->neighbours.insert({ line[2], static_cast<unsigned int>(std::stoi(line[4])) });
-			cities.at(line[2])->neighbours.insert({ line[0], static_cast<unsigned int>(std::stoi(line[4])) });
+			cities.at(line[0]).neighbours.insert({ line[2], static_cast<unsigned int>(std::stoi(line[4])) });
+			cities.at(line[2]).neighbours.insert({ line[0], static_cast<unsigned int>(std::stoi(line[4])) });
 		}
 
 		std::vector<std::string> unique;
@@ -539,7 +539,7 @@ namespace day9
 			unsigned int sum = 0;
 			for (size_t i = 0; i < unique.size() - 1; ++i)
 			{
-				sum += cities[unique[i]]->neighbours[unique[i + 1]];
+				sum += cities[unique[i]].neighbours[unique[i + 1]];
 			}
 
 			if (sum < result) result = sum;
@@ -550,7 +550,7 @@ namespace day9
 
 	void part2()
 	{
-		std::map<std::string, std::shared_ptr<City>> cities;
+		std::map<std::string, City> cities;
 		unsigned int result = 0;
 
 		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [&cities](std::string& var)
@@ -559,11 +559,11 @@ namespace day9
 			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
 		}))
 		{
-			if (cities.find(line[0]) == cities.end()) cities.insert({ line[0], std::make_shared<City>(City{ line[0],{} }) });
-			if (cities.find(line[2]) == cities.end()) cities.insert({ line[2], std::make_shared<City>(City{ line[2],{} }) });
+			if (cities.find(line[0]) == cities.end()) cities.insert({ line[0], City{ line[0], {} } });
+			if (cities.find(line[2]) == cities.end()) cities.insert({ line[2], City{ line[2], {} } });
 
-			cities.at(line[0])->neighbours.insert({ line[2], static_cast<unsigned int>(std::stoi(line[4])) });
-			cities.at(line[2])->neighbours.insert({ line[0], static_cast<unsigned int>(std::stoi(line[4])) });
+			cities.at(line[0]).neighbours.insert({ line[2], static_cast<unsigned int>(std::stoi(line[4])) });
+			cities.at(line[2]).neighbours.insert({ line[0], static_cast<unsigned int>(std::stoi(line[4])) });
 		}
 
 		std::vector<std::string> unique;
@@ -574,7 +574,7 @@ namespace day9
 			unsigned int sum = 0;
 			for (size_t i = 0; i < unique.size() - 1; ++i)
 			{
-				sum += cities[unique[i]]->neighbours[unique[i + 1]];
+				sum += cities[unique[i]].neighbours[unique[i + 1]];
 			}
 
 			if (sum > result) result = sum;
