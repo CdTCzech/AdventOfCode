@@ -862,6 +862,56 @@ namespace day12
 	}
 }
 
+namespace day13
+{
+	struct Person
+	{
+		std::string name;
+		std::map<std::string, int> neighbours;
+	};
+
+	void part1()
+	{
+		std::map<std::string, Person> persons;
+		int result = 0;
+
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day13.txt", [&persons](std::string& var)
+		{
+			var[var.size() - 1] = ' ';
+			std::istringstream iss(var);
+			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
+		}))
+		{
+			if (persons.find(line[0]) == persons.end()) persons.insert({ line[0], Person{ line[0],{} } });
+
+			int multiplier = 1;
+			if (line[2][0] == 'l') multiplier = -1;
+
+			persons.at(line[0]).neighbours.insert({ line[10], std::stoi(line[3]) * multiplier });
+		}
+
+		std::vector<std::string> unique;
+		for (auto& person : persons) unique.push_back(person.first);
+		std::sort(unique.begin(), unique.end());
+
+		do {
+			int sum = 0;
+			for (size_t i = 0; i < unique.size() - 1; ++i)
+			{
+				sum += persons[unique[i]].neighbours[unique[i + 1]];
+				sum += persons[unique[i + 1]].neighbours[unique[i]];
+			}
+			sum += persons[unique[0]].neighbours[unique[unique.size() - 1]];
+			sum += persons[unique[unique.size() - 1]].neighbours[unique[0]];
+
+
+			if (sum > result) result = sum;
+		} while (std::next_permutation(unique.begin(), unique.end()));
+
+		std::cout << result << std::endl;
+	}
+}
+
 namespace day14
 {
 	struct ReindeerStats
@@ -1038,7 +1088,7 @@ namespace day15
 
 int main()
 {
-	std::cout << "Day 1 Part 1: "; day1::part1();
+	/*std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
 	std::cout << "Day 2 Part 2: "; day2::part2();
@@ -1061,11 +1111,12 @@ int main()
 	std::cout << "Day 11 Part 1: "; day11::part1();
 	std::cout << "Day 11 Part 2: "; day11::part2();
 	std::cout << "Day 12 Part 1: "; day12::part1();
-	std::cout << "Day 12 Part 2: "; day12::part2();
-	std::cout << "Day 14 Part 1: "; day14::part1();
+	std::cout << "Day 12 Part 2: "; day12::part2();*/
+	std::cout << "Day 13 Part 1: "; day13::part1();
+	/*std::cout << "Day 14 Part 1: "; day14::part1();
 	std::cout << "Day 14 Part 2: "; day14::part2();
 	std::cout << "Day 15 Part 1: "; day15::part1();
-	std::cout << "Day 15 Part 2: "; day15::part2();
+	std::cout << "Day 15 Part 2: "; day15::part2();*/
 	system("pause");
 	return 0;
 }
