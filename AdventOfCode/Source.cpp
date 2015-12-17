@@ -1170,11 +1170,56 @@ namespace day16
 			}
 		}
 	}
+
+	void part2()
+	{
+		std::map<std::string, int> myAunt;
+		myAunt.insert({ "children",		3 });
+		myAunt.insert({ "cats",			7 });
+		myAunt.insert({ "samoyeds",		2 });
+		myAunt.insert({ "pomeranians",	3 });
+		myAunt.insert({ "akitas",		0 });
+		myAunt.insert({ "vizslas",		0 });
+		myAunt.insert({ "goldfish",		5 });
+		myAunt.insert({ "trees",		3 });
+		myAunt.insert({ "cars",			2 });
+		myAunt.insert({ "perfumes",		1 });
+
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day16.txt", [&myAunt](std::string& var)
+		{
+			std::replace(var.begin(), var.end(), ':', ' ');
+			std::replace(var.begin(), var.end(), ',', ' ');
+			std::istringstream iss(var);
+			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
+			return splitted;
+		}))
+		{
+			unsigned int result = 0;
+			for (unsigned int i = 2; i < 8; i += 2)
+			{
+				if (line[i] == "cats" || line[i] == "trees")
+				{
+					if (myAunt[line[i]] < std::stoi(line[i + 1])) ++result;
+				}
+				else if (line[i] == "pomeranians" || line[i] == "goldfish")
+				{
+					if (myAunt[line[i]] > std::stoi(line[i + 1])) ++result;
+				}
+				else if (myAunt[line[i]] == std::stoi(line[i + 1])) ++result;
+			}
+
+			if (result == 3)
+			{
+				std::cout << line[1] << std::endl;
+				break;
+			}
+		}
+	}
 }
 
 int main()
 {
-	std::cout << "Day 1 Part 1: "; day1::part1();
+	/*std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
 	std::cout << "Day 2 Part 2: "; day2::part2();
@@ -1204,7 +1249,8 @@ int main()
 	std::cout << "Day 14 Part 2: "; day14::part2();
 	std::cout << "Day 15 Part 1: "; day15::part1();
 	std::cout << "Day 15 Part 2: "; day15::part2();
-	std::cout << "Day 16 Part 1: "; day16::part1();
+	std::cout << "Day 16 Part 1: "; day16::part1();*/
+	std::cout << "Day 16 Part 2: "; day16::part2();
 	system("pause");
 	return 0;
 }
