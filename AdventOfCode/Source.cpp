@@ -1136,6 +1136,42 @@ namespace day15
 	}
 }
 
+namespace day16
+{
+	void part1()
+	{
+		std::map<std::string, unsigned int> myAunt;
+		myAunt.insert({ "children",		3 });
+		myAunt.insert({ "cats",			7 });
+		myAunt.insert({ "samoyeds",		2 });
+		myAunt.insert({ "pomeranians",	3 });
+		myAunt.insert({ "akitas",		0 });
+		myAunt.insert({ "vizslas",		0 });
+		myAunt.insert({ "goldfish",		5 });
+		myAunt.insert({ "trees",		3 });
+		myAunt.insert({ "cars",			2 });
+		myAunt.insert({ "perfumes",		1 });
+
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day16.txt", [&myAunt](std::string& var)
+		{
+			std::replace(var.begin(), var.end(), ':', ' ');
+			std::replace(var.begin(), var.end(), ',', ' ');
+			std::istringstream iss(var);
+			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
+			return splitted;
+		}))
+		{
+			if (myAunt[line[2]] == std::stoi(line[3]) &&
+				myAunt[line[4]] == std::stoi(line[5]) &&
+				myAunt[line[6]] == std::stoi(line[7]))
+			{
+				std::cout << line[1] << std::endl;
+				break;
+			}
+		}
+	}
+}
+
 int main()
 {
 	std::cout << "Day 1 Part 1: "; day1::part1();
@@ -1168,6 +1204,7 @@ int main()
 	std::cout << "Day 14 Part 2: "; day14::part2();
 	std::cout << "Day 15 Part 1: "; day15::part1();
 	std::cout << "Day 15 Part 2: "; day15::part2();
+	std::cout << "Day 16 Part 1: "; day16::part1();
 	system("pause");
 	return 0;
 }
