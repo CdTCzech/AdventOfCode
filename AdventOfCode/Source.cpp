@@ -1514,31 +1514,30 @@ namespace day20
 	void part1()
 	{
 		auto line = getLine<int>("day20.txt", [](std::string& var) { return std::stoi(var); });
-		line /= 10;
+		auto size = line / 10;
 
-		unsigned int result = 0;
-		unsigned int sum = 0;
+		std::vector<int> houses(size, 0);
 
-		while (sum < line) {
-			result += 1;
+		for (auto i = 1; i <= size; ++i)
+		{
+			auto value = i * 10;
+			for (auto j = 1; j <= (size / i); ++j)
+			{
+				houses[i * j - 1] += value;
+			}
 
-			sum = 0;
-			int d = static_cast<int>(sqrt(static_cast<double>(result))) + 1;
-			for (int i = 1; i <= d; ++i) {
-				if (result % i == 0) {
-					sum += i;
-					sum += result / i;
-				}
+			if (houses[i - 1] >= line)
+			{
+				std::cout << i << std::endl;
+				break;
 			}
 		}
-
-		std::cout << result << std::endl;
 	}
 }
 
 int main()
 {
-	std::cout << "Day 1 Part 1: "; day1::part1();
+	/*std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
 	std::cout << "Day 2 Part 2: "; day2::part2();
@@ -1574,7 +1573,7 @@ int main()
 	std::cout << "Day 17 Part 2: "; day17::part2();
 	std::cout << "Day 18 Part 1: "; day18::part1();
 	std::cout << "Day 18 Part 2: "; day18::part2();
-	std::cout << "Day 19 Part 1: "; day19::part1();
+	std::cout << "Day 19 Part 1: "; day19::part1();*/
 	std::cout << "Day 20 Part 1: "; day20::part1();
 	system("pause");
 	return 0;
