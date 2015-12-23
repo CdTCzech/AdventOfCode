@@ -1533,11 +1533,34 @@ namespace day20
 			}
 		}
 	}
+
+	void part2()
+	{
+		auto line = getLine<int>("day20.txt", [](std::string& var) { return std::stoi(var); });
+		auto size = line / 11;
+
+		std::vector<int> houses(size, 0);
+
+		for (auto i = 1; i <= size; ++i)
+		{
+			auto value = i * 11;
+			for (auto j = 1; j <= std::min((size / i), 50); ++j)
+			{
+				houses[i * j - 1] += value;
+			}
+
+			if (houses[i - 1] >= line)
+			{
+				std::cout << i << std::endl;
+				break;
+			}
+		}
+	}
 }
 
 int main()
 {
-	/*std::cout << "Day 1 Part 1: "; day1::part1();
+	std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
 	std::cout << "Day 2 Part 2: "; day2::part2();
@@ -1573,8 +1596,9 @@ int main()
 	std::cout << "Day 17 Part 2: "; day17::part2();
 	std::cout << "Day 18 Part 1: "; day18::part1();
 	std::cout << "Day 18 Part 2: "; day18::part2();
-	std::cout << "Day 19 Part 1: "; day19::part1();*/
+	std::cout << "Day 19 Part 1: "; day19::part1();
 	std::cout << "Day 20 Part 1: "; day20::part1();
+	std::cout << "Day 20 Part 2: "; day20::part2();
 	system("pause");
 	return 0;
 }
