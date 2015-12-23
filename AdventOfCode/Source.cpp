@@ -1219,12 +1219,12 @@ namespace day16
 
 namespace day17
 {
-	void combinations(unsigned int& result, std::vector<int>& numbers, int startPosition, std::vector<int> current, int count)
+	void combinations(std::vector<std::vector<int>>& result, std::vector<int>& numbers, int startPosition, std::vector<int> current, int count)
 	{
 		current.push_back(numbers[startPosition]);
 		count += numbers[startPosition];
 
-		if (count == 150) ++result;
+		if (count == 150) result.push_back(current);
 		else if (count < 150)
 		{
 			for (size_t i = startPosition + 1; i < numbers.size(); ++i)
@@ -1237,7 +1237,7 @@ namespace day17
 	void part1()
 	{
 		std::vector<int> numbers;
-		unsigned int result = 0;
+		std::vector<std::vector<int>> result;
 
 		for (const auto& line : getLineByLine<int>("day17.txt", [&numbers](std::string& var)
 		{
@@ -1253,6 +1253,35 @@ namespace day17
 		{
 			combinations(result, numbers, i, {}, 0);
 		}
+
+		std::cout << result.size() << std::endl;
+	}
+
+	void part2()
+	{
+		std::vector<int> numbers;
+		std::vector<std::vector<int>> results;
+
+		for (const auto& line : getLineByLine<int>("day17.txt", [&numbers](std::string& var)
+		{
+			return std::stoi(var);
+		}))
+		{
+			numbers.push_back(line);
+		}
+
+		std::sort(numbers.begin(), numbers.end(), std::greater<int>());
+
+		for (size_t i = 0; i < numbers.size(); ++i)
+		{
+			combinations(results, numbers, i, {}, 0);
+		}
+
+		unsigned int minimum = numbers.size();
+		for (const auto& var : results) if (var.size() < minimum) minimum = var.size();
+
+		int result = 0;
+		for (const auto& var : results) if (var.size() == minimum) ++result;
 
 		std::cout << result << std::endl;
 	}
@@ -1293,6 +1322,7 @@ int main()
 	std::cout << "Day 16 Part 1: "; day16::part1();
 	std::cout << "Day 16 Part 2: "; day16::part2();
 	std::cout << "Day 17 Part 1: "; day17::part1();
+	std::cout << "Day 17 Part 2: "; day17::part2();
 	system("pause");
 	return 0;
 }
