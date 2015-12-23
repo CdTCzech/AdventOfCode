@@ -1217,9 +1217,50 @@ namespace day16
 	}
 }
 
+namespace day17
+{
+	void combinations(unsigned int& result, std::vector<int>& numbers, int startPosition, std::vector<int> current, int count)
+	{
+		current.push_back(numbers[startPosition]);
+		count += numbers[startPosition];
+
+		if (count == 150) ++result;
+		else if (count < 150)
+		{
+			for (size_t i = startPosition + 1; i < numbers.size(); ++i)
+			{
+				combinations(result, numbers, i, current, count);
+			}
+		}
+	}
+
+	void part1()
+	{
+		std::vector<int> numbers;
+		unsigned int result = 0;
+
+		for (const auto& line : getLineByLine<int>("day17.txt", [&numbers](std::string& var)
+		{
+			return std::stoi(var);
+		}))
+		{
+			numbers.push_back(line);
+		}
+
+		std::sort(numbers.begin(), numbers.end(), std::greater<int>());
+
+		for (size_t i = 0; i < numbers.size(); ++i)
+		{
+			combinations(result, numbers, i, {}, 0);
+		}
+
+		std::cout << result << std::endl;
+	}
+}
+
 int main()
 {
-	/*std::cout << "Day 1 Part 1: "; day1::part1();
+	std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
 	std::cout << "Day 2 Part 2: "; day2::part2();
@@ -1249,8 +1290,9 @@ int main()
 	std::cout << "Day 14 Part 2: "; day14::part2();
 	std::cout << "Day 15 Part 1: "; day15::part1();
 	std::cout << "Day 15 Part 2: "; day15::part2();
-	std::cout << "Day 16 Part 1: "; day16::part1();*/
+	std::cout << "Day 16 Part 1: "; day16::part1();
 	std::cout << "Day 16 Part 2: "; day16::part2();
+	std::cout << "Day 17 Part 1: "; day17::part1();
 	system("pause");
 	return 0;
 }
