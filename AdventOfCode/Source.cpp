@@ -1507,6 +1507,26 @@ namespace day19
 
 		std::cout << result.size() << std::endl;
 	}
+
+	void part2()
+	{
+		auto line = getLine("day19_2.txt");
+
+		int total = 0;
+		for (auto& element : line) if (element >= 'A' && element <= 'Z') ++total;
+
+		int ar = 0;
+		int rn = 0;
+		int y = 0;
+		for (size_t i = 0; i < line.size() - 1; ++i)
+		{
+			if (line[i] == 'A' && line[i + 1] == 'r') ++ar;
+			if (line[i] == 'R' && line[i + 1] == 'n') ++rn;
+			if (line[i] == 'Y') ++y;
+		}
+
+		std::cout << (total - ar - rn - 2 * y - 1) << std::endl;
+	}
 }
 
 namespace day20
@@ -1597,6 +1617,7 @@ int main()
 	std::cout << "Day 18 Part 1: "; day18::part1();
 	std::cout << "Day 18 Part 2: "; day18::part2();
 	std::cout << "Day 19 Part 1: "; day19::part1();
+	std::cout << "Day 19 Part 2: "; day19::part2();
 	std::cout << "Day 20 Part 1: "; day20::part1();
 	std::cout << "Day 20 Part 2: "; day20::part2();
 	system("pause");
