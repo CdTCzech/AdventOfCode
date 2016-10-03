@@ -1578,9 +1578,142 @@ namespace day20
 	}
 }
 
+namespace day21
+{
+	struct Entity
+	{
+		int HP;
+		int DMG;
+		int ARM;
+	};
+
+	struct Item
+	{
+		int cost;
+		int damage;
+		int armor;
+	};
+
+	struct Result
+	{
+		int price;
+		size_t w;
+		size_t a;
+		size_t r1;
+		size_t r2;
+	};
+
+	std::vector<Item> Weapons
+	{
+		{  8, 4, 0 },
+		{ 10, 5, 0 },
+		{ 25, 6, 0 },
+		{ 40, 7, 0 },
+		{ 74, 8, 0 }
+	};
+
+	std::vector<Item> Armors
+	{
+		{   0, 0, 0 },
+		{  13, 0, 1 },
+		{  31, 0, 2 },
+		{  53, 0, 3 },
+		{  75, 0, 4 },
+		{ 102, 0, 5 }
+	};
+
+	std::vector<Item> Rings
+	{
+		{   0, 0, 0 },
+		{  25, 1, 0 },
+		{  50, 2, 0 },
+		{ 100, 3, 0 },
+		{  20, 0, 1 },
+		{  40, 0, 2 },
+		{  80, 0, 3 }
+	};
+
+	bool simulate(Entity& player, Entity& boss)
+	{
+		while (true)
+		{
+			boss.HP = boss.HP + boss.ARM - player.DMG;
+			if (boss.HP <= 0) return true;
+			player.HP = player.HP + player.ARM - boss.DMG;
+			if (player.HP <= 0) return false;
+		}
+	}
+
+	void part1()
+	{
+		Result result{ 99999, 0, 0, 0 };
+
+		for (size_t w = 0; w < Weapons.size(); ++w)
+		{
+			for (size_t a = 0; a < Armors.size(); ++a)
+			{
+				for (size_t r1 = 0; r1 < Armors.size(); ++r1)
+				{
+					for (size_t r2 = 0; r2 < Armors.size(); ++r2)
+					{
+						Entity player
+						{ 
+							100,
+							Weapons[w].damage + Armors[a].damage + Rings[r1].damage + (r1 != r2 ? Rings[r2].damage : 0),
+							Weapons[w].armor + Armors[a].armor + Rings[r1].armor + (r1 != r2 ? Rings[r2].armor : 0)
+						};
+						Entity boss{ 104, 8, 1 };
+
+						if (simulate(player, boss))
+						{
+							auto price = Weapons[w].cost + Armors[a].cost + Rings[r1].cost + (r1 != r2 ? Rings[r2].cost : 0);
+							if (price < result.price) result = { price, w, a, r1, r2};
+						}
+					}
+				}
+			}
+		}
+
+		std::cout << result.price << " (" << result.w << ", " << result.a << ", " << result.r1 << ", " << result.r2 << ")" <<std::endl;
+	}
+
+	void part2()
+	{
+		Result result{ 0, 0, 0, 0 };
+
+		for (size_t w = 0; w < Weapons.size(); ++w)
+		{
+			for (size_t a = 0; a < Armors.size(); ++a)
+			{
+				for (size_t r1 = 0; r1 < Armors.size(); ++r1)
+				{
+					for (size_t r2 = 0; r2 < Armors.size(); ++r2)
+					{
+						Entity player
+						{
+							100,
+							Weapons[w].damage + Armors[a].damage + Rings[r1].damage + (r1 != r2 ? Rings[r2].damage : 0),
+							Weapons[w].armor + Armors[a].armor + Rings[r1].armor + (r1 != r2 ? Rings[r2].armor : 0)
+						};
+						Entity boss{ 104, 8, 1 };
+
+						if (!simulate(player, boss))
+						{
+							auto price = Weapons[w].cost + Armors[a].cost + Rings[r1].cost + (r1 != r2 ? Rings[r2].cost : 0);
+							if (price > result.price) result = { price, w, a, r1, r2 };
+						}
+					}
+				}
+			}
+		}
+
+		std::cout << result.price << " (" << result.w << ", " << result.a << ", " << result.r1 << ", " << result.r2 << ")" << std::endl;
+	}
+}
+
 int main()
 {
-	std::cout << "Day 1 Part 1: "; day1::part1();
+	/*std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
 	std::cout << "Day 2 Part 2: "; day2::part2();
@@ -1619,7 +1752,9 @@ int main()
 	std::cout << "Day 19 Part 1: "; day19::part1();
 	std::cout << "Day 19 Part 2: "; day19::part2();
 	std::cout << "Day 20 Part 1: "; day20::part1();
-	std::cout << "Day 20 Part 2: "; day20::part2();
+	std::cout << "Day 20 Part 2: "; day20::part2();*/
+	std::cout << "Day 21 Part 1: "; day21::part1();
+	std::cout << "Day 21 Part 1: "; day21::part2();
 	system("pause");
 	return 0;
 }
