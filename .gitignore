@@ -210,3 +210,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/AdventOfCode.VC.db
+/AdventOfCode.VC.VC.opendb
