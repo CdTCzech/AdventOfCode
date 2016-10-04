@@ -1725,8 +1725,13 @@ namespace day22
 		int DMG;
 	};
 
-	int simulate(bool playerTurn, Player player, Boss boss, int s, int p, int r)
+	int simulate(bool playerTurn, Player player, Boss boss, int s, int p, int r, bool hardMode = false)
 	{
+		if (playerTurn && hardMode)
+		{
+			player.HP -= 1;
+		}
+
 		if (p)
 		{
 			boss.HP -= 3;
@@ -1750,40 +1755,45 @@ namespace day22
 			// MAGIC MISSILE
 			if (player.MAN >= 53)
 			{
-				results[0] = 53 + simulate(false, { player.HP, player.MAN - 53 }, { boss.HP - 4, boss.DMG }, s, p, r);
+				results[0] = 53 + simulate(false, { player.HP, player.MAN - 53 }, { boss.HP - 4, boss.DMG }, s, p, r, hardMode);
 			}
 			// DRAIN
 			if (player.MAN >= 73)
 			{
-				results[1] = 73 + simulate(false, { player.HP + 2, player.MAN - 73 }, { boss.HP - 2, boss.DMG }, s, p, r);
+				results[1] = 73 + simulate(false, { player.HP + 2, player.MAN - 73 }, { boss.HP - 2, boss.DMG }, s, p, r, hardMode);
 			}
 			// SHIELD
 			if (player.MAN >= 113 && !s)
 			{
-				results[2] = 113 + simulate(false, { player.HP, player.MAN - 113 }, { boss.HP, boss.DMG }, 6, p, r);
+				results[2] = 113 + simulate(false, { player.HP, player.MAN - 113 }, { boss.HP, boss.DMG }, 6, p, r, hardMode);
 			}
 			// POISON
 			if (player.MAN >= 173 && !p)
 			{
-				results[3] = 173 + simulate(false, { player.HP, player.MAN - 173 }, { boss.HP, boss.DMG }, s, 6, r);
+				results[3] = 173 + simulate(false, { player.HP, player.MAN - 173 }, { boss.HP, boss.DMG }, s, 6, r, hardMode);
 			}
 			// RECHARGE
 			if (player.MAN >= 229 && !r)
 			{
-				results[4] = 229 + simulate(false, { player.HP, player.MAN - 229 }, { boss.HP, boss.DMG }, s, p, 5);
+				results[4] = 229 + simulate(false, { player.HP, player.MAN - 229 }, { boss.HP, boss.DMG }, s, p, 5, hardMode);
 			}
 
 			return *std::min_element(results, results + 5);
 		}
 		else
 		{
-			return simulate(true, { player.HP - boss.DMG + (s ? 7 : 0) , player.MAN }, { boss.HP, boss.DMG }, (s ? s - 1 : s), p, r);
+			return simulate(true, { player.HP - boss.DMG + (s ? 7 : 0) , player.MAN }, { boss.HP, boss.DMG }, (s ? s - 1 : s), p, r, hardMode);
 		}
 	}
 
 	void part1()
 	{
 		std::cout << simulate(true, { 50, 500 }, { 71, 10 }, 0, 0, 0) << std::endl;
+	}
+
+	void part2()
+	{
+		std::cout << simulate(true, { 50, 500 }, { 71, 10 }, 0, 0, 0, true) << std::endl;
 	}
 }
 
@@ -1832,6 +1842,7 @@ int main()
 	std::cout << "Day 21 Part 1: "; day21::part1();
 	std::cout << "Day 21 Part 2: "; day21::part2();
 	std::cout << "Day 22 Part 1: "; day22::part1();
+	std::cout << "Day 22 Part 2: "; day22::part2();
 	system("pause");
 	return 0;
 }
