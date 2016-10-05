@@ -1797,6 +1797,89 @@ namespace day22
 	}
 }
 
+namespace day23
+{
+	int stringToNumber(const std::string &number)
+	{
+		std::istringstream ss(number);
+		int result;
+		return ss >> result ? result : 0;
+	}
+
+	void simulate(unsigned regA, unsigned regB)
+	{
+		std::vector<std::string> program;
+		size_t currentLine = 0;
+		for (const auto& line : getLineByLine("day23.txt"))
+		{
+			program.push_back(line);
+		}
+
+		while (currentLine < program.size())
+		{
+			if (program[currentLine][2] == 'f') // hlf
+			{
+				if (program[currentLine][4] == 'a') regA /= 2;
+				else regB /= 2;
+				++currentLine;
+			}
+			else if (program[currentLine][2] == 'l') // tpl
+			{
+				if (program[currentLine][4] == 'a') regA *= 3;
+				else regB *= 3;
+				++currentLine;
+			}
+			else if (program[currentLine][2] == 'c') // inc
+			{
+				if (program[currentLine][4] == 'a') regA += 1;
+				else regB += 1;
+				++currentLine;
+			}
+			else if (program[currentLine][2] == 'p') // jmp
+			{
+				auto offset = program[currentLine].substr(4);
+				currentLine += stringToNumber(offset);
+			}
+			else if (program[currentLine][2] == 'e') // jie
+			{
+				if ((program[currentLine][4] == 'a' && regA % 2 == 0) || (program[currentLine][4] == 'b' && regB % 2 == 0))
+				{
+					auto offset = program[currentLine].substr(7);
+					currentLine += stringToNumber(offset);
+				}
+				else ++currentLine;
+			}
+			else if (program[currentLine][2] == 'o') // jio
+			{
+				if ((program[currentLine][4] == 'a' && regA == 1) || (program[currentLine][4] == 'b' && regB == 1))
+				{
+					auto offset = program[currentLine].substr(7);
+					currentLine += stringToNumber(offset);
+				}
+				else ++currentLine;
+			}
+		}
+
+		std::cout << regB << std::endl;
+	}
+
+	void part1()
+	{
+		unsigned int regA = 0;
+		unsigned int regB = 0;
+
+		simulate(regA, regB);
+	}
+
+	void part2()
+	{
+		unsigned int regA = 1;
+		unsigned int regB = 0;
+
+		simulate(regA, regB);
+	}
+}
+
 int main()
 {
 	std::cout << "Day 1 Part 1: "; day1::part1();
@@ -1843,6 +1926,8 @@ int main()
 	std::cout << "Day 21 Part 2: "; day21::part2();
 	std::cout << "Day 22 Part 1: "; day22::part1();
 	std::cout << "Day 22 Part 2: "; day22::part2();
+	std::cout << "Day 23 Part 1: "; day23::part1();
+	std::cout << "Day 23 Part 2: "; day23::part2();
 	system("pause");
 	return 0;
 }
