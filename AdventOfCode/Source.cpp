@@ -1810,7 +1810,7 @@ namespace day23
 	{
 		std::vector<std::string> program;
 		size_t currentLine = 0;
-		for (const auto& line : getLineByLine("day23.txt"))
+		for (const auto& line : getLineByLine<std::string>("day23.txt", [&program, &currentLine](std::string& var) { return var; }))
 		{
 			program.push_back(line);
 		}
@@ -1882,7 +1882,7 @@ namespace day23
 
 int main()
 {
-	std::cout << "Day 1 Part 1: "; day1::part1();
+	/*std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
 	std::cout << "Day 2 Part 2: "; day2::part2();
@@ -1926,7 +1926,7 @@ int main()
 	std::cout << "Day 21 Part 2: "; day21::part2();
 	std::cout << "Day 22 Part 1: "; day22::part1();
 	std::cout << "Day 22 Part 2: "; day22::part2();
-	std::cout << "Day 23 Part 1: "; day23::part1();
+	std::cout << "Day 23 Part 1: "; day23::part1();*/
 	std::cout << "Day 23 Part 2: "; day23::part2();
 	system("pause");
 	return 0;

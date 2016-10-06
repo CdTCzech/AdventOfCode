@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Libraries">
-      <UniqueIdentifier>{a34a68fe-5307-4042-822a-0648079296a1}</UniqueIdentifier>
+    <Filter Include="Header Files\MD5">
+      <UniqueIdentifier>{0126b431-8f4d-46c1-8c8a-b17da6548747}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Libraries">
-      <UniqueIdentifier>{af5fd0f5-2972-46f3-814d-60e89af68eeb}</UniqueIdentifier>
+    <Filter Include="Source Files\MD5">
+      <UniqueIdentifier>{f18fd98e-147e-4b0a-a839-e52118e56452}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -25,7 +25,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Libraries\md5.cpp">
-      <Filter>Source Files\Libraries</Filter>
+      <Filter>Source Files\MD5</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,10 +33,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\md5.h">
-      <Filter>Header Files\Libraries</Filter>
+      <Filter>Header Files\MD5</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>
