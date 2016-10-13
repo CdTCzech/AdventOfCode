@@ -1928,6 +1928,42 @@ namespace day24
 		return false;
 	}
 
+	bool findNextGroup(unsigned int howManyToFind, unsigned int sumToFind, std::vector<unsigned int>& findVector)
+	{
+		if (howManyToFind == 0)
+		{
+			return true;
+		}
+
+		for (size_t i = 1; i < findVector.size(); ++i)
+		{
+			do
+			{
+				unsigned int pkgSum = 0;
+				if (howManyToFind == 1)
+					pkgSum = std::accumulate(findVector.begin(), findVector.end(), 0);
+				else
+					pkgSum = std::accumulate(findVector.begin(), findVector.begin() + i, 0);
+				if (pkgSum == sumToFind)
+				{
+					std::vector<unsigned int> subsetVec(findVector.begin(), findVector.begin() + i);
+					std::vector<unsigned int> newFindVec;
+					for (auto number : findVector)
+					{
+						if (std::find(subsetVec.begin(), subsetVec.end(), number) == subsetVec.end())
+						{
+							newFindVec.push_back(number);
+						}
+					}
+
+					return findNextGroup(howManyToFind - 1, sumToFind, newFindVec);
+				}
+			} while (next_combination(findVector.begin(), findVector.begin() + i, findVector.end()));
+		}
+
+		return false;
+	}
+
 	void part1()
 	{
 		std::vector<unsigned int> packages;
@@ -1991,30 +2027,11 @@ namespace day24
 				}
 			}
 
-			for (size_t i = 1; i < secondVec.size(); ++i)
-			do
+			if (findNextGroup(3 - 1, third, secondVec))
 			{
-				unsigned int pkgSum2 = std::accumulate(secondVec.begin(), secondVec.begin() + i, 0);
-				std::vector<unsigned int> subsetVec2(secondVec.begin(), secondVec.begin() + i);
-				if (pkgSum2 == third)
-				{
-					std::vector<unsigned int> thirdVec;
-					for (auto number2 : secondVec)
-					{
-						if (std::find(subsetVec2.begin(), subsetVec2.end(), number2) == subsetVec2.end())
-						{
-							thirdVec.push_back(number2);
-						}
-					}
-
-					unsigned int pkgSum3 = std::accumulate(thirdVec.begin(), thirdVec.end(), 0);
-					if (pkgSum3 == third)
-					{
-						std::cout << std::get<0>(subset) << std::endl;
-						return;
-					}
-				}
-			} while (next_combination(secondVec.begin(), secondVec.begin() + i, secondVec.end()));
+				std::cout << std::get<0>(subset) << std::endl;
+				return;
+			}
 		}
 	}
 }
