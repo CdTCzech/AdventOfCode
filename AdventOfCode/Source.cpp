@@ -4,6 +4,7 @@
 #include <iterator>
 #include <locale>
 #include <map>
+#include <numeric>
 #include <set>
 #include <sstream>
 #include <vector>
@@ -1880,9 +1881,147 @@ namespace day23
 	}
 }
 
+namespace day24
+{
+	int stringToNumber(const std::string &number)
+	{
+		std::istringstream ss(number);
+		int result;
+		return ss >> result ? result : 0;
+	}
+
+	template <typename Iterator>
+	bool next_combination(const Iterator first, Iterator k, const Iterator last)
+	{
+		if ((first == last) || (first == k) || (last == k))
+			return false;
+		Iterator i1 = first;
+		Iterator i2 = last;
+		++i1;
+		if (last == i1)
+			return false;
+		i1 = last;
+		--i1;
+		i1 = k;
+		--i2;
+		while (first != i1)
+		{
+			if (*--i1 < *i2)
+			{
+				Iterator j = k;
+				while (!(*i1 < *j)) ++j;
+				std::iter_swap(i1, j);
+				++i1;
+				++j;
+				i2 = k;
+				std::rotate(i1, j, last);
+				while (last != j)
+				{
+					++j;
+					++i2;
+				}
+				std::rotate(k, i2, last);
+				return true;
+			}
+		}
+		std::rotate(first, k, last);
+		return false;
+	}
+
+	void part1()
+	{
+		std::vector<unsigned int> packages;
+		std::vector<std::tuple<unsigned long long int, std::vector<unsigned int>>> subsets;
+		for (const auto& line : getLineByLine<std::string>("day24.txt", [&packages, &subsets](std::string& var) { return var; }))
+		{
+			packages.push_back(stringToNumber(line));
+		}
+
+		unsigned int sum = std::accumulate(packages.begin(), packages.end(), 0);
+		unsigned int third = sum / 3;
+		size_t start = 0, stop = 0;
+
+		for (size_t i = packages.size() - 1; i > 0; --i)
+		{
+			start += packages[i];
+			if (start > third)
+			{
+				start = packages.size() - i;
+				break;
+			}
+		}
+
+		for (size_t i = 0; i < packages.size(); ++i)
+		{
+			stop += packages[i];
+			if (stop > third)
+			{
+				stop = i - 1;
+				break;
+			}
+		}
+
+		for (size_t i = start; i <= stop; ++i)
+		{
+			do
+			{
+				unsigned int pkgSum = std::accumulate(packages.begin(), packages.begin() + i, 0);
+				if (pkgSum == third)
+				{
+					unsigned long long int acc = std::accumulate(packages.begin(), packages.begin() + i, (unsigned long long int) 1, std::multiplies<unsigned long long int>());
+					subsets.push_back({ acc, std::vector<unsigned int>(packages.begin(), packages.begin() + i) });
+				}
+			} while (next_combination(packages.begin(), packages.begin() + i, packages.end()));
+		}
+
+		std::sort(subsets.begin(), subsets.end(), [](auto& t1, auto& t2) {
+			return (std::get<1>(t1).size() < std::get<1>(t2).size() ||
+				(std::get<1>(t1).size() == std::get<1>(t2).size() && std::get<0>(t1) < std::get<0>(t2)));
+		});
+
+		for (auto& subset : subsets)
+		{
+			std::vector<unsigned int> secondVec;
+			auto subsetVec = std::get<1>(subset);
+			for (auto number : packages)
+			{
+				if (std::find(subsetVec.begin(), subsetVec.end(), number) == subsetVec.end())
+				{
+					secondVec.push_back(number);
+				}
+			}
+
+			for (size_t i = 1; i < secondVec.size(); ++i)
+			do
+			{
+				unsigned int pkgSum2 = std::accumulate(secondVec.begin(), secondVec.begin() + i, 0);
+				std::vector<unsigned int> subsetVec2(secondVec.begin(), secondVec.begin() + i);
+				if (pkgSum2 == third)
+				{
+					std::vector<unsigned int> thirdVec;
+					for (auto number2 : secondVec)
+					{
+						if (std::find(subsetVec2.begin(), subsetVec2.end(), number2) == subsetVec2.end())
+						{
+							thirdVec.push_back(number2);
+						}
+					}
+
+					unsigned int pkgSum3 = std::accumulate(thirdVec.begin(), thirdVec.end(), 0);
+					if (pkgSum3 == third)
+					{
+						std::cout << std::get<0>(subset) << std::endl;
+						return;
+					}
+				}
+			} while (next_combination(secondVec.begin(), secondVec.begin() + i, secondVec.end()));
+		}
+	}
+}
+
 int main()
 {
-	/*std::cout << "Day 1 Part 1: "; day1::part1();
+	std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
 	std::cout << "Day 2 Part 2: "; day2::part2();
@@ -1926,8 +2065,9 @@ int main()
 	std::cout << "Day 21 Part 2: "; day21::part2();
 	std::cout << "Day 22 Part 1: "; day22::part1();
 	std::cout << "Day 22 Part 2: "; day22::part2();
-	std::cout << "Day 23 Part 1: "; day23::part1();*/
+	std::cout << "Day 23 Part 1: "; day23::part1();
 	std::cout << "Day 23 Part 2: "; day23::part2();
+	std::cout << "Day 24 Part 1: "; day24::part1();
 	system("pause");
 	return 0;
 }
