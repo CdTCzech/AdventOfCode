@@ -1964,7 +1964,7 @@ namespace day24
 		return false;
 	}
 
-	void part1()
+	unsigned long long int getQuantumEntanglement(unsigned int groups)
 	{
 		std::vector<unsigned int> packages;
 		std::vector<std::tuple<unsigned long long int, std::vector<unsigned int>>> subsets;
@@ -1974,7 +1974,7 @@ namespace day24
 		}
 
 		unsigned int sum = std::accumulate(packages.begin(), packages.end(), 0);
-		unsigned int third = sum / 3;
+		unsigned int third = sum / groups;
 		size_t start = 0, stop = 0;
 
 		for (size_t i = packages.size() - 1; i > 0; --i)
@@ -2008,36 +2008,45 @@ namespace day24
 					subsets.push_back({ acc, std::vector<unsigned int>(packages.begin(), packages.begin() + i) });
 				}
 			} while (next_combination(packages.begin(), packages.begin() + i, packages.end()));
-		}
 
-		std::sort(subsets.begin(), subsets.end(), [](auto& t1, auto& t2) {
-			return (std::get<1>(t1).size() < std::get<1>(t2).size() ||
-				(std::get<1>(t1).size() == std::get<1>(t2).size() && std::get<0>(t1) < std::get<0>(t2)));
-		});
+			std::sort(subsets.begin(), subsets.end());
 
-		for (auto& subset : subsets)
-		{
-			std::vector<unsigned int> secondVec;
-			auto subsetVec = std::get<1>(subset);
-			for (auto number : packages)
+			for (auto& subset : subsets)
 			{
-				if (std::find(subsetVec.begin(), subsetVec.end(), number) == subsetVec.end())
+				std::vector<unsigned int> secondVec;
+				auto subsetVec = std::get<1>(subset);
+				for (auto number : packages)
 				{
-					secondVec.push_back(number);
+					if (std::find(subsetVec.begin(), subsetVec.end(), number) == subsetVec.end())
+					{
+						secondVec.push_back(number);
+					}
+				}
+
+				if (findNextGroup(groups - 1, third, secondVec))
+				{
+					return std::get<0>(subset);
 				}
 			}
-
-			if (findNextGroup(3 - 1, third, secondVec))
-			{
-				std::cout << std::get<0>(subset) << std::endl;
-				return;
-			}
 		}
+
+		return 0;
+	}
+
+	void part1()
+	{
+		std::cout << getQuantumEntanglement(3) << std::endl;
+	}
+
+	void part2()
+	{
+		std::cout << getQuantumEntanglement(4) << std::endl;
 	}
 }
 
 int main()
 {
+
 	std::cout << "Day 1 Part 1: "; day1::part1();
 	std::cout << "Day 1 Part 2: "; day1::part2();
 	std::cout << "Day 2 Part 1: "; day2::part1();
@@ -2085,6 +2094,7 @@ int main()
 	std::cout << "Day 23 Part 1: "; day23::part1();
 	std::cout << "Day 23 Part 2: "; day23::part2();
 	std::cout << "Day 24 Part 1: "; day24::part1();
+	std::cout << "Day 24 Part 2: "; day24::part2();
 	system("pause");
 	return 0;
 }
