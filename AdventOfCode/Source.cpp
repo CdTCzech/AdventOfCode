@@ -1315,7 +1315,7 @@ namespace day18
 
 		size_t lineNumber = 1;
 
-		for (const auto& line : getLineByLine("day18.txt"))
+		for (const auto& line : getLineByLine<std::string>("day18.txt", [&one, &two, &lineNumber](std::string& var) { return var; }))
 		{
 			for (size_t i = 0; i < line.size(); ++i) one[lineNumber][i + 1] = line[i];
 			++lineNumber;
@@ -1389,7 +1389,7 @@ namespace day18
 
 		size_t lineNumber = 1;
 
-		for (const auto& line : getLineByLine("day18.txt"))
+		for (const auto& line : getLineByLine<std::string>("day18.txt", [&one, &two, &lineNumber](std::string& var) { return var; }))
 		{
 			for (size_t i = 0; i < line.size(); ++i) one[lineNumber][i + 1] = line[i];
 			++lineNumber;
@@ -1677,7 +1677,7 @@ namespace day21
 			}
 		}
 
-		std::cout << result.price << " (" << result.w << ", " << result.a << ", " << result.r1 << ", " << result.r2 << ")" <<std::endl;
+		std::cout << result.price <<std::endl;
 	}
 
 	void part2()
@@ -1710,7 +1710,7 @@ namespace day21
 			}
 		}
 
-		std::cout << result.price << " (" << result.w << ", " << result.a << ", " << result.r1 << ", " << result.r2 << ")" << std::endl;
+		std::cout << result.price << std::endl;
 	}
 }
 
@@ -2071,56 +2071,55 @@ namespace day25
 
 int main()
 {
-
-	std::cout << "Day 1 Part 1: "; day1::part1();
-	std::cout << "Day 1 Part 2: "; day1::part2();
-	std::cout << "Day 2 Part 1: "; day2::part1();
-	std::cout << "Day 2 Part 2: "; day2::part2();
-	std::cout << "Day 3 Part 1: "; day3::part1();
-	std::cout << "Day 3 Part 2: "; day3::part2();
-	std::cout << "Day 4 Part 1: "; day4::part1();
-	std::cout << "Day 4 Part 2: "; day4::part2();
-	std::cout << "Day 5 Part 1: "; day5::part1();
-	std::cout << "Day 5 Part 2: "; day5::part2();
-	std::cout << "Day 6 Part 1: "; day6::part1();
-	std::cout << "Day 6 Part 2: "; day6::part2();
-	std::cout << "Day 7 Part 1: "; day7::part1();
-	std::cout << "Day 7 Part 2: "; day7::part2();
-	std::cout << "Day 8 Part 1: "; day8::part1();
-	std::cout << "Day 8 Part 2: "; day8::part2();
-	std::cout << "Day 9 Part 1: "; day9::part1();
-	std::cout << "Day 9 Part 2: "; day9::part2();
-	std::cout << "Day 10 Part 1: "; day10::part1();
-	std::cout << "Day 10 Part 2: "; day10::part2();
-	std::cout << "Day 11 Part 1: "; day11::part1();
-	std::cout << "Day 11 Part 2: "; day11::part2();
-	std::cout << "Day 12 Part 1: "; day12::part1();
-	std::cout << "Day 12 Part 2: "; day12::part2();
-	std::cout << "Day 13 Part 1: "; day13::part1();
-	std::cout << "Day 13 Part 2: "; day13::part2();
-	std::cout << "Day 14 Part 1: "; day14::part1();
-	std::cout << "Day 14 Part 2: "; day14::part2();
-	std::cout << "Day 15 Part 1: "; day15::part1();
-	std::cout << "Day 15 Part 2: "; day15::part2();
-	std::cout << "Day 16 Part 1: "; day16::part1();
-	std::cout << "Day 16 Part 2: "; day16::part2();
-	std::cout << "Day 17 Part 1: "; day17::part1();
-	std::cout << "Day 17 Part 2: "; day17::part2();
-	std::cout << "Day 18 Part 1: "; day18::part1();
-	std::cout << "Day 18 Part 2: "; day18::part2();
-	std::cout << "Day 19 Part 1: "; day19::part1();
-	std::cout << "Day 19 Part 2: "; day19::part2();
-	std::cout << "Day 20 Part 1: "; day20::part1();
-	std::cout << "Day 20 Part 2: "; day20::part2();
-	std::cout << "Day 21 Part 1: "; day21::part1();
-	std::cout << "Day 21 Part 2: "; day21::part2();
-	std::cout << "Day 22 Part 1: "; day22::part1();
-	std::cout << "Day 22 Part 2: "; day22::part2();
-	std::cout << "Day 23 Part 1: "; day23::part1();
-	std::cout << "Day 23 Part 2: "; day23::part2();
-	std::cout << "Day 24 Part 1: "; day24::part1();
-	std::cout << "Day 24 Part 2: "; day24::part2();
-	std::cout << "Day 25 Part 1: "; day25::part1();
+	std::cout << "Day 1 Part 1 (expected 232): ";			day1::part1();
+	std::cout << "Day 1 Part 2 (expected 1783): ";			day1::part2();
+	std::cout << "Day 2 Part 1 (expected 1598415): ";		day2::part1();
+	std::cout << "Day 2 Part 2 (expected 3812909): ";		day2::part2();
+	std::cout << "Day 3 Part 1 (expected 2081): ";			day3::part1();
+	std::cout << "Day 3 Part 2 (expected 2341): ";			day3::part2();
+	std::cout << "Day 4 Part 1 (expected 282749): ";		day4::part1();
+	std::cout << "Day 4 Part 2 (expected 9962624): ";		day4::part2();
+	std::cout << "Day 5 Part 1 (expected 255): ";			day5::part1();
+	std::cout << "Day 5 Part 2 (expected 55): ";			day5::part2();
+	std::cout << "Day 6 Part 1 (expected 377891): ";		day6::part1();
+	std::cout << "Day 6 Part 2 (expected 14110788): ";		day6::part2();
+	std::cout << "Day 7 Part 1 (expected 16076): ";			day7::part1();
+	std::cout << "Day 7 Part 2 (expected 2797): ";			day7::part2();
+	std::cout << "Day 8 Part 1 (expected 1333): ";			day8::part1();
+	std::cout << "Day 8 Part 2 (expected 2046): ";			day8::part2();
+	std::cout << "Day 9 Part 1 (expected 251): ";			day9::part1();
+	std::cout << "Day 9 Part 2 (expected 898): ";			day9::part2();
+	std::cout << "Day 10 Part 1 (expected 360154): ";		day10::part1();
+	std::cout << "Day 10 Part 2 (expected 5103798): ";		day10::part2();
+	std::cout << "Day 11 Part 1 (expected hepxxyzz): ";		day11::part1();
+	std::cout << "Day 11 Part 2 (expected heqaabcc): ";		day11::part2();
+	std::cout << "Day 12 Part 1 (expected 111754): ";		day12::part1();
+	std::cout << "Day 12 Part 2 (expected 65402): ";		day12::part2();
+	std::cout << "Day 13 Part 1 (expected 733): ";			day13::part1();
+	std::cout << "Day 13 Part 2 (expected 725): ";			day13::part2();
+	std::cout << "Day 14 Part 1 (expected 2696): ";			day14::part1();
+	std::cout << "Day 14 Part 2 (expected 1084): ";			day14::part2();
+	std::cout << "Day 15 Part 1 (expected 222870): ";		day15::part1();
+	std::cout << "Day 15 Part 2 (expected 117936): ";		day15::part2();
+	std::cout << "Day 16 Part 1 (expected 40): ";			day16::part1(); // NOT WORKING in VS 15 Preview 5 release mode
+	std::cout << "Day 16 Part 2 (expected 241): ";			day16::part2(); // NOT WORKING in VS 15 Preview 5 release mode
+	std::cout << "Day 17 Part 1 (expected 4372): ";			day17::part1();
+	std::cout << "Day 17 Part 2 (expected 4): ";			day17::part2();
+	std::cout << "Day 18 Part 1 (expected 821): ";			day18::part1();
+	std::cout << "Day 18 Part 2 (expected 886): ";			day18::part2();
+	std::cout << "Day 19 Part 1 (expected 576): ";			day19::part1();
+	std::cout << "Day 19 Part 2 (expected 207): ";			day19::part2();
+	std::cout << "Day 20 Part 1 (expected 831600): ";		day20::part1();
+	std::cout << "Day 20 Part 2 (expected 884520): ";		day20::part2();
+	std::cout << "Day 21 Part 1 (expected 78): ";			day21::part1();
+	std::cout << "Day 21 Part 2 (expected 148): ";			day21::part2();
+	std::cout << "Day 22 Part 1 (expected 1824): ";			day22::part1();
+	std::cout << "Day 22 Part 2 (expected 1937): ";			day22::part2();
+	std::cout << "Day 23 Part 1 (expected 184): ";			day23::part1();
+	std::cout << "Day 23 Part 2 (expected 231): ";			day23::part2();
+	std::cout << "Day 24 Part 1 (expected 10723906903): ";	day24::part1();
+	std::cout << "Day 24 Part 2 (expected 74850409): ";		day24::part2();
+	std::cout << "Day 25 Part 1 (expected 2650453): ";		day25::part1();
 	system("pause");
 	return 0;
 }
