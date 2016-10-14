@@ -12,6 +12,8 @@
 #include "Libraries/md5.h"
 #include "FileReader.h"
 
+typedef unsigned __int64 uint64;
+
 
 namespace day1
 {
@@ -1057,7 +1059,7 @@ namespace day15
 	void part1()
 	{
 		std::vector<Cookie> cookies;
-		unsigned long long int result = 0;
+		uint64 result = 0;
 
 		for (const auto& line : getLineByLine<Cookie>("day15.txt", [&cookies](std::string& var)
 		{
@@ -1085,7 +1087,7 @@ namespace day15
 
 					if (capacity <= 0 || durability <= 0 || flavor <= 0 || texture <= 0) continue;
 
-					unsigned long long int score = capacity * durability * flavor * texture;
+					uint64 score = capacity * durability * flavor * texture;
 
 					if (score > result) result = score;
 				}
@@ -1098,7 +1100,7 @@ namespace day15
 	void part2()
 	{
 		std::vector<Cookie> cookies;
-		unsigned long long int result = 0;
+		uint64 result = 0;
 
 		for (const auto& line : getLineByLine<Cookie>("day15.txt", [&cookies](std::string& var)
 		{
@@ -1127,7 +1129,7 @@ namespace day15
 
 					if (calories != 500 || capacity <= 0 || durability <= 0 || flavor <= 0 || texture <= 0) continue;
 
-					unsigned long long int score = capacity * durability * flavor * texture;
+					uint64 score = capacity * durability * flavor * texture;
 
 					if (score > result) result = score;
 				}
@@ -1964,10 +1966,10 @@ namespace day24
 		return false;
 	}
 
-	unsigned long long int getQuantumEntanglement(unsigned int groups)
+	uint64 getQuantumEntanglement(unsigned int groups)
 	{
 		std::vector<unsigned int> packages;
-		std::vector<std::tuple<unsigned long long int, std::vector<unsigned int>>> subsets;
+		std::vector<std::tuple<uint64, std::vector<unsigned int>>> subsets;
 		for (const auto& line : getLineByLine<std::string>("day24.txt", [&packages, &subsets](std::string& var) { return var; }))
 		{
 			packages.push_back(stringToNumber(line));
@@ -2004,7 +2006,7 @@ namespace day24
 				unsigned int pkgSum = std::accumulate(packages.begin(), packages.begin() + i, 0);
 				if (pkgSum == third)
 				{
-					unsigned long long int acc = std::accumulate(packages.begin(), packages.begin() + i, (unsigned long long int) 1, std::multiplies<unsigned long long int>());
+					uint64 acc = std::accumulate(packages.begin(), packages.begin() + i, (uint64) 1, std::multiplies<uint64>());
 					subsets.push_back({ acc, std::vector<unsigned int>(packages.begin(), packages.begin() + i) });
 				}
 			} while (next_combination(packages.begin(), packages.begin() + i, packages.end()));
@@ -2041,6 +2043,29 @@ namespace day24
 	void part2()
 	{
 		std::cout << getQuantumEntanglement(4) << std::endl;
+	}
+}
+
+namespace day25
+{
+	void part1()
+	{
+		uint64 result = 20151125;
+		uint64 multiplier = 252533;
+		uint64 devider = 33554393;
+		uint64 rowToFind = 2978;
+		uint64 columnToFind = 3083;
+
+		auto oneRowBeforeStart = rowToFind + columnToFind - 2;
+		auto index = (oneRowBeforeStart * 1) + ((oneRowBeforeStart * (oneRowBeforeStart - 1)) / 2) + columnToFind - 1;
+		
+		while (index)
+		{
+			result = (result * multiplier) % devider;
+			--index;
+		}
+
+		std::cout << result << std::endl;
 	}
 }
 
@@ -2095,6 +2120,7 @@ int main()
 	std::cout << "Day 23 Part 2: "; day23::part2();
 	std::cout << "Day 24 Part 1: "; day24::part1();
 	std::cout << "Day 24 Part 2: "; day24::part2();
+	std::cout << "Day 25 Part 1: "; day25::part1();
 	system("pause");
 	return 0;
 }
