@@ -17,13 +17,13 @@ auto getLine(std::string filename, std::function<T(std::string&)> func = [](std:
 }
 
 template <typename T = std::string>
-auto getLineByLine(std::string filename, std::function<T(std::string&)> func = [](std::string& var) { return var; } )
+auto getLineByLine(std::string filename, std::function<T(std::string&)> func = [](std::string& var) { return var; })
 {
 	std::ifstream infile(filename);
 	std::string line;
 
 	while (getline(infile, line))
 	{
-		yield func(line);
+		co_yield func(line);
 	}
 }

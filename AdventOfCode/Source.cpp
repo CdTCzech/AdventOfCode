@@ -34,7 +34,8 @@ namespace day1
 	void part2()
 	{
 		const auto& line = getLine("day1.txt");
-		int floor = 0, result = 0;
+		int floor = 0;
+		size_t result = 0;
 
 		for (size_t i = 0; i < line.size(); ++i)
 		{
@@ -469,7 +470,7 @@ namespace day8
 {
 	void part1()
 	{
-		unsigned int result = 0;
+		size_t result = 0;
 
 		for (const auto& line : getLineByLine<std::string>("day8.txt", [&result](std::string& var) { return var; }))
 		{
@@ -1223,7 +1224,7 @@ namespace day16
 
 namespace day17
 {
-	void combinations(std::vector<std::vector<int>>& result, std::vector<int>& numbers, int startPosition, std::vector<int> current, int count)
+	void combinations(std::vector<std::vector<int>>& result, std::vector<int>& numbers, size_t startPosition, std::vector<int> current, int count)
 	{
 		current.push_back(numbers[startPosition]);
 		count += numbers[startPosition];
@@ -1281,7 +1282,7 @@ namespace day17
 			combinations(results, numbers, i, {}, 0);
 		}
 
-		unsigned int minimum = numbers.size();
+		size_t minimum = numbers.size();
 		for (const auto& var : results) if (var.size() < minimum) minimum = var.size();
 
 		int result = 0;
@@ -2101,8 +2102,8 @@ int main()
 	std::cout << "Day 14 Part 2 (expected 1084): ";			day14::part2();
 	std::cout << "Day 15 Part 1 (expected 222870): ";		day15::part1();
 	std::cout << "Day 15 Part 2 (expected 117936): ";		day15::part2();
-	std::cout << "Day 16 Part 1 (expected 40): ";			day16::part1(); // NOT WORKING in VS 15 Preview 5 release mode
-	std::cout << "Day 16 Part 2 (expected 241): ";			day16::part2(); // NOT WORKING in VS 15 Preview 5 release mode
+	std::cout << "Day 16 Part 1 (expected 40): ";			day16::part1();
+	std::cout << "Day 16 Part 2 (expected 241): ";			day16::part2();
 	std::cout << "Day 17 Part 1 (expected 4372): ";			day17::part1();
 	std::cout << "Day 17 Part 2 (expected 4): ";			day17::part2();
 	std::cout << "Day 18 Part 1 (expected 821): ";			day18::part1();
@@ -2123,4 +2124,3 @@ int main()
 	system("pause");
 	return 0;
 }
- 
