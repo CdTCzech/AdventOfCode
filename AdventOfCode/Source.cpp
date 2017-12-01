@@ -1,3 +1,7 @@
+#include "Libraries/md5.h"
+
+#include "FileReader.h"
+
 #include <algorithm>
 #include <array>
 #include <iostream>
@@ -9,11 +13,6 @@
 #include <sstream>
 #include <vector>
 
-#include "Libraries/md5.h"
-#include "FileReader.h"
-
-typedef unsigned __int64 uint64;
-
 
 namespace day1
 {
@@ -24,8 +23,8 @@ namespace day1
 
 		for (auto character : line)
 		{
-			if (character == '(') ++result;
-			else --result;
+			if (character == '(') { ++result; }
+			else { --result; }
 		}
 
 		std::cout << result << std::endl;
@@ -51,7 +50,7 @@ namespace day1
 
 		std::cout << result + 1 << std::endl;
 	}
-}
+}  // namespace day1
 
 namespace day2
 {
@@ -66,7 +65,7 @@ namespace day2
 	{
 		auto result = 0;
 
-		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [&result](std::string& var)
+		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), 'x', ' ');
 			std::istringstream iss(var);
@@ -89,7 +88,7 @@ namespace day2
 	{
 		auto result = 0;
 
-		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [&result](std::string& var)
+		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), 'x', ' ');
 			std::istringstream iss(var);
@@ -105,7 +104,7 @@ namespace day2
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day2
 
 namespace day3
 {
@@ -132,10 +131,10 @@ namespace day3
 		{
 			points.insert(currentPosition);
 
-			if (character == '^') ++currentPosition.y;
-			else if (character == 'v') --currentPosition.y;
-			else if (character == '<') --currentPosition.x;
-			else if (character == '>') ++currentPosition.x;
+			if (character == '^') { ++currentPosition.y; }
+			else if (character == 'v') { --currentPosition.y; }
+			else if (character == '<') { --currentPosition.x; }
+			else if (character == '>') { ++currentPosition.x; }
 		}
 
 		std::cout << points.size() << std::endl;
@@ -152,22 +151,22 @@ namespace day3
 		bool isSantaTurn = true;
 		for (auto character : line)
 		{
-			if (isSantaTurn) current = &currentPositionSanta;
-			else current = &currentPositionRobo;
+			if (isSantaTurn) { current = &currentPositionSanta; }
+			else { current = &currentPositionRobo; }
 
 			isSantaTurn = !isSantaTurn;
 
 			points.insert(*current);
 
-			if (character == '^') ++current->y;
-			else if (character == 'v') --current->y;
-			else if (character == '<') --current->x;
-			else if (character == '>') ++current->x;
+			if (character == '^') { ++current->y; }
+			else if (character == 'v') { --current->y; }
+			else if (character == '<') { --current->x; }
+			else if (character == '>') { ++current->x; }
 		}
 
 		std::cout << points.size() << std::endl;
 	}
-}
+}  // namespace day3
 
 namespace day4
 {
@@ -198,7 +197,7 @@ namespace day4
 			}
 		}
 	}
-}
+}  // namespace day4
 
 namespace day5
 {
@@ -206,7 +205,7 @@ namespace day5
 	{
 		int result = 0;
 
-		for (const auto& line : getLineByLine<std::string>("day5.txt", [&result](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("day5.txt", [](std::string& var) { return var; }))
 		{
 			int vowels = 0;
 			bool twice = false;
@@ -240,7 +239,7 @@ namespace day5
 	{
 		int result = 0;
 
-		for (const auto& line : getLineByLine<std::string>("day5.txt", [&result](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("day5.txt", [](std::string& var) { return var; }))
 		{
 			bool pair = false;
 			bool between = false;
@@ -276,7 +275,7 @@ namespace day5
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day5
 
 namespace day6
 {
@@ -299,7 +298,7 @@ namespace day6
 		std::vector<std::vector<bool>> grid(1000, std::vector<bool>(1000, false));
 		unsigned int result = 0;
 
-		for (const auto& line : getLineByLine<Command>("day6.txt", [&grid](std::string& var)
+		for (const auto& line : getLineByLine<Command>("day6.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);
@@ -333,7 +332,7 @@ namespace day6
 		{
 			for (const auto x : y)
 			{
-				if (x == true) ++result;
+				if (x) ++result;
 			}
 		}
 
@@ -345,7 +344,7 @@ namespace day6
 		std::vector<std::vector<int>> grid(1000, std::vector<int>(1000, 0));
 		unsigned int result = 0;
 
-		for (const auto& line : getLineByLine<Command>("day6.txt", [&grid](std::string& var)
+		for (const auto& line : getLineByLine<Command>("day6.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);
@@ -388,7 +387,7 @@ namespace day6
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day6
 
 namespace day7
 {
@@ -418,11 +417,12 @@ namespace day7
 			results.insert({ key, ~getResult(tokens[1]) });
 			return results.at(key);
 		}
-		
-		if (tokens[1][0] == 'A') results.insert({ key, getResult(tokens[0]) & getResult(tokens[2]) });
-		else if (tokens[1][0] == 'O') results.insert({ key, getResult(tokens[0]) | getResult(tokens[2]) });
-		else if (tokens[1][0] == 'L') results.insert({ key, getResult(tokens[0]) << getResult(tokens[2]) });
-		else if (tokens[1][0] == 'R') results.insert({ key, getResult(tokens[0]) >> getResult(tokens[2]) });
+
+		if (tokens[1][0] == 'A') { results.insert({ key, getResult(tokens[0]) & getResult(tokens[2]) }); }
+		else if (tokens[1][0] == 'O') { results.insert({ key, getResult(tokens[0]) | getResult(tokens[2]) }); }
+		else if (tokens[1][0] == 'L') { results.insert({ key, getResult(tokens[0]) << getResult(tokens[2]) }); }
+		else if (tokens[1][0] == 'R') { results.insert({ key, getResult(tokens[0]) >> getResult(tokens[2]) }); }
+
 		return results.at(key);
 	}
 
@@ -454,7 +454,7 @@ namespace day7
 			instructions.insert({ line.back(),{ line.begin(), line.end() - 2 } });
 		}
 
-		auto part1Result = getResult("a");
+		const auto part1Result = getResult("a");
 		results.clear();
 
 		instructions.at("b").clear();
@@ -464,7 +464,7 @@ namespace day7
 		instructions.clear();
 		results.clear();
 	}
-}
+}  // namespace day7
 
 namespace day8
 {
@@ -496,7 +496,7 @@ namespace day8
 	{
 		unsigned int result = 0;
 
-		for (const auto& line : getLineByLine<std::string>("day8.txt", [&result](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("day8.txt", [](std::string& var) { return var; }))
 		{
 			result += 2;
 
@@ -508,7 +508,7 @@ namespace day8
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day8
 
 namespace day9
 {
@@ -523,7 +523,7 @@ namespace day9
 		std::map<std::string, City> cities;
 		unsigned int result = 4294967295;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [&cities](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
@@ -558,7 +558,7 @@ namespace day9
 		std::map<std::string, City> cities;
 		unsigned int result = 0;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [&cities](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
@@ -587,7 +587,7 @@ namespace day9
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day9
 
 namespace day10
 {
@@ -654,7 +654,7 @@ namespace day10
 
 		std::cout << result.size() << std::endl;
 	}
-}
+}  // namespace day10
 
 namespace day11
 {
@@ -673,7 +673,7 @@ namespace day11
 
 	void part1()
 	{
-		auto& line = getLine("day11.txt");
+		auto line = getLine("day11.txt");
 
 		bool increasing = false;
 		bool banned = false;
@@ -776,7 +776,7 @@ namespace day11
 
 		std::cout << line << std::endl;
 	}
-}
+}  // namespace day11
 
 namespace day12
 {
@@ -789,8 +789,8 @@ namespace day12
 
 		for (const auto character : line)
 		{
-			if (character == '-' && buffer.empty()) buffer += character;
-			else if (character >= '0' && character <= '9') buffer += character;
+			if (character == '-' && buffer.empty()) { buffer += character; }
+			else if (character >= '0' && character <= '9') { buffer += character; }
 			else if (!buffer.empty())
 			{
 				result += std::stoi(buffer);
@@ -821,8 +821,8 @@ namespace day12
 				{
 					--start;
 					if (start == -1) return;
-					if (line[start] == '{') --counter;
-					else if (line[start] == '}') ++counter;
+					if (line[start] == '{') { --counter; }
+					else if (line[start] == '}') { ++counter; }
 				}
 
 				counter = 0;
@@ -831,8 +831,8 @@ namespace day12
 				{
 					++index;
 					if (index == line.size()) return;
-					if (line[index] == '{') ++counter;
-					else if (line[index] == '}') --counter;
+					if (line[index] == '{') { ++counter; }
+					else if (line[index] == '}') { --counter; }
 				}
 
 				toSkip.insert({ start, index });
@@ -853,8 +853,8 @@ namespace day12
 				continue;
 			}
 
-			if (line[index] == '-' && buffer.empty()) buffer += line[index];
-			else if (line[index] >= '0' && line[index] <= '9') buffer += line[index];
+			if (line[index] == '-' && buffer.empty()) { buffer += line[index]; }
+			else if (line[index] >= '0' && line[index] <= '9') { buffer += line[index]; }
 			else if (!buffer.empty())
 			{
 				result += std::stoi(buffer);
@@ -865,7 +865,7 @@ namespace day12
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day12
 
 namespace day13
 {
@@ -880,7 +880,7 @@ namespace day13
 		std::map<std::string, Person> persons;
 		int result = 0;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day13.txt", [&persons](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day13.txt", [](std::string& var)
 		{
 			var[var.size() - 1] = ' ';
 			std::istringstream iss(var);
@@ -921,7 +921,7 @@ namespace day13
 		std::map<std::string, Person> persons;
 		int result = 0;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day13.txt", [&persons](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day13.txt", [](std::string& var)
 		{
 			var[var.size() - 1] = ' ';
 			std::istringstream iss(var);
@@ -945,7 +945,7 @@ namespace day13
 			persons.at("me").neighbours.insert({ person, 0 });
 			persons.at(person).neighbours.insert({ "me", 0 });
 		}
-		unique.push_back("me");
+		unique.emplace_back("me");
 
 		std::sort(unique.begin(), unique.end());
 
@@ -965,7 +965,7 @@ namespace day13
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day13
 
 namespace day14
 {
@@ -982,10 +982,10 @@ namespace day14
 
 	void part1()
 	{
-		int time = 2503;
+		const int time = 2503;
 		int maximal = 0;
 
-		for (const auto& line : getLineByLine<ReindeerStats>("day14.txt", [&time, &maximal](std::string& var)
+		for (const auto& line : getLineByLine<ReindeerStats>("day14.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
@@ -1010,7 +1010,7 @@ namespace day14
 	{
 		std::vector<ReindeerStats> reindeers;
 
-		for (const auto& line : getLineByLine<ReindeerStats>("day14.txt", [&reindeers](std::string& var)
+		for (const auto& line : getLineByLine<ReindeerStats>("day14.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
@@ -1028,8 +1028,8 @@ namespace day14
 				--reindeer.secondsRemaining;
 				if (reindeer.secondsRemaining == 0)
 				{
-					if (reindeer.phase) reindeer.secondsRemaining = reindeer.restTime;
-					else reindeer.secondsRemaining = reindeer.flyTime;
+					if (reindeer.phase) { reindeer.secondsRemaining = reindeer.restTime; }
+					else { reindeer.secondsRemaining = reindeer.flyTime; }
 					reindeer.phase = !reindeer.phase;
 				}
 			}
@@ -1044,7 +1044,7 @@ namespace day14
 
 		std::cout << maximum << std::endl;
 	}
-}
+}  // namespace day14
 
 namespace day15
 {
@@ -1060,9 +1060,9 @@ namespace day15
 	void part1()
 	{
 		std::vector<Cookie> cookies;
-		uint64 result = 0;
+		uint64_t result = 0;
 
-		for (const auto& line : getLineByLine<Cookie>("day15.txt", [&cookies](std::string& var)
+		for (const auto& line : getLineByLine<Cookie>("day15.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);
@@ -1079,16 +1079,16 @@ namespace day15
 			{
 				for (int k = 1; k <= 100 - i - j; ++k)
 				{
-					int l = 100 - i - j - k;
+					const int l = 100 - i - j - k;
 
-					long long int capacity =	i * cookies[0].capacity   +	j * cookies[1].capacity   +	k * cookies[2].capacity   +	l * cookies[3].capacity;
-					long long int durability =	i * cookies[0].durability + j * cookies[1].durability + k * cookies[2].durability + l * cookies[3].durability;
-					long long int flavor =		i * cookies[0].flavor     +	j * cookies[1].flavor     +	k * cookies[2].flavor     +	l * cookies[3].flavor;
-					long long int texture =		i * cookies[0].texture    +	j * cookies[1].texture    +	k * cookies[2].texture    +	l * cookies[3].texture;
+					const long long int capacity =		i * cookies[0].capacity   +	j * cookies[1].capacity   +	k * cookies[2].capacity   +	l * cookies[3].capacity;
+					const long long int durability =	i * cookies[0].durability + j * cookies[1].durability + k * cookies[2].durability + l * cookies[3].durability;
+					const long long int flavor =		i * cookies[0].flavor     +	j * cookies[1].flavor     +	k * cookies[2].flavor     +	l * cookies[3].flavor;
+					const long long int texture =		i * cookies[0].texture    +	j * cookies[1].texture    +	k * cookies[2].texture    +	l * cookies[3].texture;
 
 					if (capacity <= 0 || durability <= 0 || flavor <= 0 || texture <= 0) continue;
 
-					uint64 score = capacity * durability * flavor * texture;
+					const uint64_t score = capacity * durability * flavor * texture;
 
 					if (score > result) result = score;
 				}
@@ -1101,9 +1101,9 @@ namespace day15
 	void part2()
 	{
 		std::vector<Cookie> cookies;
-		uint64 result = 0;
+		uint64_t result = 0;
 
-		for (const auto& line : getLineByLine<Cookie>("day15.txt", [&cookies](std::string& var)
+		for (const auto& line : getLineByLine<Cookie>("day15.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);
@@ -1120,17 +1120,17 @@ namespace day15
 			{
 				for (int k = 1; k <= 100 - i - j; ++k)
 				{
-					int l = 100 - i - j - k;
+					const int l = 100 - i - j - k;
 
-					long long int capacity =	i * cookies[0].capacity   +	j * cookies[1].capacity   +	k * cookies[2].capacity   +	l * cookies[3].capacity;
-					long long int durability =	i * cookies[0].durability + j * cookies[1].durability +	k * cookies[2].durability + l * cookies[3].durability;
-					long long int flavor =		i * cookies[0].flavor     +	j * cookies[1].flavor	  +	k * cookies[2].flavor     +	l * cookies[3].flavor;
-					long long int texture =		i * cookies[0].texture	  +	j * cookies[1].texture	  +	k * cookies[2].texture    +	l * cookies[3].texture;
-					long long int calories =	i * cookies[0].calories	  + j * cookies[1].calories	  + k * cookies[2].calories	  + l * cookies[3].calories;
+					const long long int capacity =		i * cookies[0].capacity   +	j * cookies[1].capacity   +	k * cookies[2].capacity   +	l * cookies[3].capacity;
+					const long long int durability =	i * cookies[0].durability + j * cookies[1].durability +	k * cookies[2].durability + l * cookies[3].durability;
+					const long long int flavor =		i * cookies[0].flavor     +	j * cookies[1].flavor	  +	k * cookies[2].flavor     +	l * cookies[3].flavor;
+					const long long int texture =		i * cookies[0].texture	  +	j * cookies[1].texture	  +	k * cookies[2].texture    +	l * cookies[3].texture;
+					const long long int calories =		i * cookies[0].calories	  + j * cookies[1].calories	  + k * cookies[2].calories	  + l * cookies[3].calories;
 
 					if (calories != 500 || capacity <= 0 || durability <= 0 || flavor <= 0 || texture <= 0) continue;
 
-					uint64 score = capacity * durability * flavor * texture;
+					const uint64_t score = capacity * durability * flavor * texture;
 
 					if (score > result) result = score;
 				}
@@ -1139,7 +1139,7 @@ namespace day15
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day15
 
 namespace day16
 {
@@ -1157,7 +1157,7 @@ namespace day16
 		myAunt.insert({ "cars",			2 });
 		myAunt.insert({ "perfumes",		1 });
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day16.txt", [&myAunt](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day16.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ':', ' ');
 			std::replace(var.begin(), var.end(), ',', ' ');
@@ -1190,7 +1190,7 @@ namespace day16
 		myAunt.insert({ "cars",			2 });
 		myAunt.insert({ "perfumes",		1 });
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day16.txt", [&myAunt](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day16.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ':', ' ');
 			std::replace(var.begin(), var.end(), ',', ' ');
@@ -1220,7 +1220,7 @@ namespace day16
 			}
 		}
 	}
-}
+}  // namespace day16
 
 namespace day17
 {
@@ -1244,7 +1244,7 @@ namespace day17
 		std::vector<int> numbers;
 		std::vector<std::vector<int>> result;
 
-		for (const auto& line : getLineByLine<int>("day17.txt", [&numbers](std::string& var)
+		for (const auto& line : getLineByLine<int>("day17.txt", [](std::string& var)
 		{
 			return std::stoi(var);
 		}))
@@ -1267,7 +1267,7 @@ namespace day17
 		std::vector<int> numbers;
 		std::vector<std::vector<int>> results;
 
-		for (const auto& line : getLineByLine<int>("day17.txt", [&numbers](std::string& var)
+		for (const auto& line : getLineByLine<int>("day17.txt", [](std::string& var)
 		{
 			return std::stoi(var);
 		}))
@@ -1290,7 +1290,7 @@ namespace day17
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day17
 
 namespace day18
 {
@@ -1352,9 +1352,9 @@ namespace day18
 					if ((*read)[y + 1][x - 1] == '#') ++neighboursOn;
 					if ((*read)[y + 1][x] == '#') ++neighboursOn;
 
-					if (((*read)[y][x] == '#') && (neighboursOn == 2 || neighboursOn == 3)) (*write)[y][x] = '#';
-					else if (((*read)[y][x] == '.') && (neighboursOn == 3)) (*write)[y][x] = '#';
-					else (*write)[y][x] = '.';
+					if (((*read)[y][x] == '#') && (neighboursOn == 2 || neighboursOn == 3)) { (*write)[y][x] = '#'; }
+					else if (((*read)[y][x] == '.') && (neighboursOn == 3)) { (*write)[y][x] = '#'; }
+					else { (*write)[y][x] = '.'; }
 				}
 			}
 		}
@@ -1431,9 +1431,9 @@ namespace day18
 					if ((*read)[y + 1][x - 1] == '#') ++neighboursOn;
 					if ((*read)[y + 1][x] == '#') ++neighboursOn;
 
-					if (((*read)[y][x] == '#') && (neighboursOn == 2 || neighboursOn == 3)) (*write)[y][x] = '#';
-					else if (((*read)[y][x] == '.') && (neighboursOn == 3)) (*write)[y][x] = '#';
-					else (*write)[y][x] = '.';
+					if (((*read)[y][x] == '#') && (neighboursOn == 2 || neighboursOn == 3)) { (*write)[y][x] = '#'; }
+					else if (((*read)[y][x] == '.') && (neighboursOn == 3)) { (*write)[y][x] = '#'; }
+					else { (*write)[y][x] = '.'; }
 				}
 			}
 
@@ -1451,7 +1451,7 @@ namespace day18
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day18
 
 namespace day19
 {
@@ -1460,7 +1460,7 @@ namespace day19
 		std::map<std::string, std::vector<std::string>> replacements;
 		std::set<std::string> result;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day19_1.txt", [&replacements](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("day19_1.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
@@ -1498,7 +1498,7 @@ namespace day19
 			}
 		}
 
-		std::string key{ line[line.size() - 1] };
+		const std::string key{ line[line.size() - 1] };
 		if (replacements.find(key) != replacements.end())
 		{
 			for (const auto& replacement : replacements.at(key))
@@ -1531,20 +1531,20 @@ namespace day19
 
 		std::cout << (total - ar - rn - 2 * y - 1) << std::endl;
 	}
-}
+}  // namespace day19
 
 namespace day20
 {
 	void part1()
 	{
-		auto line = getLine<int>("day20.txt", [](std::string& var) { return std::stoi(var); });
+		const auto line = getLine<int>("day20.txt", [](std::string& var) { return std::stoi(var); });
 		auto size = line / 10;
 
 		std::vector<int> houses(size, 0);
 
 		for (auto i = 1; i <= size; ++i)
 		{
-			auto value = i * 10;
+			const auto value = i * 10;
 			for (auto j = 1; j <= (size / i); ++j)
 			{
 				houses[i * j - 1] += value;
@@ -1560,14 +1560,14 @@ namespace day20
 
 	void part2()
 	{
-		auto line = getLine<int>("day20.txt", [](std::string& var) { return std::stoi(var); });
+		const auto line = getLine<int>("day20.txt", [](std::string& var) { return std::stoi(var); });
 		auto size = line / 11;
 
 		std::vector<int> houses(size, 0);
 
 		for (auto i = 1; i <= size; ++i)
 		{
-			auto value = i * 11;
+			const auto value = i * 11;
 			for (auto j = 1; j <= std::min((size / i), 50); ++j)
 			{
 				houses[i * j - 1] += value;
@@ -1580,7 +1580,7 @@ namespace day20
 			}
 		}
 	}
-}
+}  // namespace day20
 
 namespace day21
 {
@@ -1661,7 +1661,7 @@ namespace day21
 					for (size_t r2 = 0; r2 < Armors.size(); ++r2)
 					{
 						Entity player
-						{ 
+						{
 							100,
 							Weapons[w].damage + Armors[a].damage + Rings[r1].damage + (r1 != r2 ? Rings[r2].damage : 0),
 							Weapons[w].armor + Armors[a].armor + Rings[r1].armor + (r1 != r2 ? Rings[r2].armor : 0)
@@ -1713,7 +1713,7 @@ namespace day21
 
 		std::cout << result.price << std::endl;
 	}
-}
+}  // namespace day21
 
 namespace day22
 {
@@ -1729,7 +1729,7 @@ namespace day22
 		int DMG;
 	};
 
-	int simulate(bool playerTurn, Player player, Boss boss, int s, int p, int r, bool hardMode = false)
+	int simulate(const bool playerTurn, Player player, Boss boss, int s, int p, int r, const bool hardMode = false)
 	{
 		if (playerTurn && hardMode)
 		{
@@ -1799,7 +1799,7 @@ namespace day22
 	{
 		std::cout << simulate(true, { 50, 500 }, { 71, 10 }, 0, 0, 0, true) << std::endl;
 	}
-}
+}  // namespace day22
 
 namespace day23
 {
@@ -1810,7 +1810,7 @@ namespace day23
 		return ss >> result ? result : 0;
 	}
 
-	void simulate(unsigned regA, unsigned regB)
+	void simulate(unsigned int regA, unsigned int regB)
 	{
 		std::vector<std::string> program;
 		size_t currentLine = 0;
@@ -1823,20 +1823,20 @@ namespace day23
 		{
 			if (program[currentLine][2] == 'f') // hlf
 			{
-				if (program[currentLine][4] == 'a') regA /= 2;
-				else regB /= 2;
+				if (program[currentLine][4] == 'a') { regA /= 2; }
+				else { regB /= 2; }
 				++currentLine;
 			}
 			else if (program[currentLine][2] == 'l') // tpl
 			{
-				if (program[currentLine][4] == 'a') regA *= 3;
-				else regB *= 3;
+				if (program[currentLine][4] == 'a') { regA *= 3; }
+				else { regB *= 3; }
 				++currentLine;
 			}
 			else if (program[currentLine][2] == 'c') // inc
 			{
-				if (program[currentLine][4] == 'a') regA += 1;
-				else regB += 1;
+				if (program[currentLine][4] == 'a') { regA += 1; }
+				else { regB += 1; }
 				++currentLine;
 			}
 			else if (program[currentLine][2] == 'p') // jmp
@@ -1869,20 +1869,20 @@ namespace day23
 
 	void part1()
 	{
-		unsigned int regA = 0;
-		unsigned int regB = 0;
+		const unsigned int regA = 0;
+		const unsigned int regB = 0;
 
 		simulate(regA, regB);
 	}
 
 	void part2()
 	{
-		unsigned int regA = 1;
-		unsigned int regB = 0;
+		const unsigned int regA = 1;
+		const unsigned int regB = 0;
 
 		simulate(regA, regB);
 	}
-}
+}  // namespace day23
 
 namespace day24
 {
@@ -1896,13 +1896,11 @@ namespace day24
 	template <typename Iterator>
 	bool next_combination(const Iterator first, Iterator k, const Iterator last)
 	{
-		if ((first == last) || (first == k) || (last == k))
-			return false;
+		if ((first == last) || (first == k) || (last == k)) { return false; }
 		Iterator i1 = first;
 		Iterator i2 = last;
 		++i1;
-		if (last == i1)
-			return false;
+		if (last == i1) { return false; }
 		i1 = last;
 		--i1;
 		i1 = k;
@@ -1931,7 +1929,7 @@ namespace day24
 		return false;
 	}
 
-	bool findNextGroup(unsigned int howManyToFind, unsigned int sumToFind, std::vector<unsigned int>& findVector)
+	bool findNextGroup(const unsigned int howManyToFind, const unsigned int sumToFind, std::vector<unsigned int>& findVector)
 	{
 		if (howManyToFind == 0)
 		{
@@ -1943,10 +1941,9 @@ namespace day24
 			do
 			{
 				unsigned int pkgSum = 0;
-				if (howManyToFind == 1)
-					pkgSum = std::accumulate(findVector.begin(), findVector.end(), 0);
-				else
-					pkgSum = std::accumulate(findVector.begin(), findVector.begin() + i, 0);
+				if (howManyToFind == 1) { pkgSum = std::accumulate(findVector.begin(), findVector.end(), static_cast<unsigned int>(0)); }
+				else { pkgSum = std::accumulate(findVector.begin(), findVector.begin() + i, static_cast<unsigned int>(0)); }
+
 				if (pkgSum == sumToFind)
 				{
 					std::vector<unsigned int> subsetVec(findVector.begin(), findVector.begin() + i);
@@ -1967,17 +1964,17 @@ namespace day24
 		return false;
 	}
 
-	uint64 getQuantumEntanglement(unsigned int groups)
+	uint64_t getQuantumEntanglement(const unsigned int groups)
 	{
 		std::vector<unsigned int> packages;
-		std::vector<std::tuple<uint64, std::vector<unsigned int>>> subsets;
-		for (const auto& line : getLineByLine<std::string>("day24.txt", [&packages, &subsets](std::string& var) { return var; }))
+		std::vector<std::tuple<uint64_t, std::vector<unsigned int>>> subsets;
+		for (const auto& line : getLineByLine<std::string>("day24.txt", [](std::string& var) { return var; }))
 		{
 			packages.push_back(stringToNumber(line));
 		}
 
-		unsigned int sum = std::accumulate(packages.begin(), packages.end(), 0);
-		unsigned int third = sum / groups;
+		const unsigned int sum = std::accumulate(packages.begin(), packages.end(), 0);
+		const unsigned int third = sum / groups;
 		size_t start = 0, stop = 0;
 
 		for (size_t i = packages.size() - 1; i > 0; --i)
@@ -2004,11 +2001,11 @@ namespace day24
 		{
 			do
 			{
-				unsigned int pkgSum = std::accumulate(packages.begin(), packages.begin() + i, 0);
+				const unsigned int pkgSum = std::accumulate(packages.begin(), packages.begin() + i, 0);
 				if (pkgSum == third)
 				{
-					uint64 acc = std::accumulate(packages.begin(), packages.begin() + i, (uint64) 1, std::multiplies<uint64>());
-					subsets.push_back({ acc, std::vector<unsigned int>(packages.begin(), packages.begin() + i) });
+					uint64_t acc = std::accumulate(packages.begin(), packages.begin() + i, static_cast<uint64_t>(1), std::multiplies<uint64_t>());
+					subsets.emplace_back( acc, std::vector<unsigned int>(packages.begin(), packages.begin() + i) );
 				}
 			} while (next_combination(packages.begin(), packages.begin() + i, packages.end()));
 
@@ -2045,21 +2042,21 @@ namespace day24
 	{
 		std::cout << getQuantumEntanglement(4) << std::endl;
 	}
-}
+}  // namespace day24
 
 namespace day25
 {
 	void part1()
 	{
-		uint64 result = 20151125;
-		uint64 multiplier = 252533;
-		uint64 devider = 33554393;
-		uint64 rowToFind = 2978;
-		uint64 columnToFind = 3083;
+		uint64_t result = 20151125;
+		const uint64_t multiplier = 252533;
+		const uint64_t devider = 33554393;
+		const uint64_t rowToFind = 2978;
+		const uint64_t columnToFind = 3083;
 
-		auto oneRowBeforeStart = rowToFind + columnToFind - 2;
+		const auto oneRowBeforeStart = rowToFind + columnToFind - 2;
 		auto index = (oneRowBeforeStart * 1) + ((oneRowBeforeStart * (oneRowBeforeStart - 1)) / 2) + columnToFind - 1;
-		
+
 		while (index)
 		{
 			result = (result * multiplier) % devider;
@@ -2068,7 +2065,7 @@ namespace day25
 
 		std::cout << result << std::endl;
 	}
-}
+}  // namespace day25
 
 int main()
 {
