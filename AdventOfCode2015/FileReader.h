@@ -10,13 +10,13 @@
 
 
 template <typename T = std::string>
-auto getLine(std::string filename, std::function<T(std::string&)> func = [](std::string& var) { return var; })
+auto getLine(const std::string& filename, std::function<T(std::string&)> func = [](std::string& var) { return var; })
 {
 	std::ifstream infile(filename);
 
 	if (!infile.good())
 	{
-		throw EXCEPTION("Reading file " + filename);
+		throw utils::AoCException("Reading file " + filename, __FILE__, __LINE__);
 	}
 
 	std::string line;
@@ -26,13 +26,14 @@ auto getLine(std::string filename, std::function<T(std::string&)> func = [](std:
 }
 
 template <typename T = std::string>
-auto getLineByLine(std::string filename, std::function<T(std::string&)> func = [](std::string& var) { return var; })
+auto getLineByLine(const std::string& filename, std::function<T(std::string&)> func = [](std::string& var) { return var; })
 {
 	std::ifstream infile(filename);
 
 	if (!infile.good())
 	{
-		throw EXCEPTION("Reading file " + filename);
+		auto ICE = "Reading file" + filename;
+		throw utils::AoCException(ICE, __FILE__, __LINE__);
 	}
 
 	std::string line;
