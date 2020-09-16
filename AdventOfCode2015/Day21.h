@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-
 #include <vector>
 
 namespace day21
@@ -61,4 +60,4 @@ namespace day21
 
 	int64_t part1();
 	int64_t part2();
-}  // namespace day21
+} // namespace day21

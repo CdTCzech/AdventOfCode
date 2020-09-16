@@ -33,4 +33,4 @@ namespace day4
 		}
 		return 0;
 	}
-}  // namespace day4
+} // namespace day4

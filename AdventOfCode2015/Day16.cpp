@@ -88,4 +88,4 @@ namespace day16
 
 		return {};
 	}
-}  // namespace day16
+} // namespace day16

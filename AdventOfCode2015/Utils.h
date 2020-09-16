@@ -2,7 +2,6 @@
 
 #include <string>
 
-
 namespace utils
 {
 	class AoCException : public std::exception
@@ -20,4 +19,4 @@ namespace utils
 	private:
 		std::string m_what;
 	};
-}
+} // namespace utils

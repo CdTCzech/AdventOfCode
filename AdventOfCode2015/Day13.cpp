@@ -2,9 +2,11 @@
 
 #include "FileReader.h"
 
-#include "algorithm"
-#include "iterator"
-#include "sstream"
+#include <algorithm>
+#include <iterator>
+#include <map>
+#include <sstream>
+#include <string>
 
 namespace day13
 {
@@ -20,7 +22,7 @@ namespace day13
 			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
 		}))
 		{
-			if (persons.find(line[0]) == persons.end()) persons.insert({ line[0], Person{ line[0],{} } });
+			if (persons.find(line[0]) == persons.end()) persons.insert({ line[0], Person{ line[0], {} } });
 
 			auto multiplier = 1;
 			if (line[2][0] == 'l') multiplier = -1;
@@ -61,7 +63,7 @@ namespace day13
 			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
 		}))
 		{
-			if (persons.find(line[0]) == persons.end()) persons.insert({ line[0], Person{ line[0],{} } });
+			if (persons.find(line[0]) == persons.end()) persons.insert({line[0], Person{ line[0], {} }});
 
 			auto multiplier = 1;
 			if (line[2][0] == 'l') multiplier = -1;
@@ -72,7 +74,7 @@ namespace day13
 		std::vector<std::string> unique;
 		for (auto& person : persons) unique.push_back(person.first);
 
-		persons.insert({ "me", Person{ "me",{} } });
+		persons.insert({ "me", Person{ "me", {} }});
 		for (auto& person : unique)
 		{
 			persons.at("me").neighbours.insert({ person, 0 });
@@ -98,4 +100,4 @@ namespace day13
 
 		return result;
 	}
-}  // namespace day13
+} // namespace day13

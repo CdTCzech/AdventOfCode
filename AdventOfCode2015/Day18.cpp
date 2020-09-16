@@ -163,4 +163,4 @@ namespace day18
 
 		return result;
 	}
-}  // namespace day18
+} // namespace day18

@@ -78,4 +78,4 @@ namespace day21
 
 		return result.price;
 	}
-}  // namespace day21
+} // namespace day21

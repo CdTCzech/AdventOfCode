@@ -122,4 +122,4 @@ namespace day11
 
 		return line;
 	}
-}  // namespace day11
+} // namespace day11

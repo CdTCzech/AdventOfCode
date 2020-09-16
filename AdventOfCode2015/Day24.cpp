@@ -157,4 +157,4 @@ namespace day24
 	{
 		return getQuantumEntanglement(4);
 	}
-}  // namespace day24
+} // namespace day24

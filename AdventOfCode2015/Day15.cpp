@@ -90,4 +90,4 @@ namespace day15
 
 		return result;
 	}
-}  // namespace day15
+} // namespace day15

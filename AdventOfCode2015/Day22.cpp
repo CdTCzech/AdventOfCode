@@ -72,4 +72,4 @@ namespace day22
 	{
 		return simulate(true, { 50, 500 }, { 71, 10 }, 0, 0, 0, true);
 	}
-}  // namespace day22
+} // namespace day22

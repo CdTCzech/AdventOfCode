@@ -53,4 +53,4 @@ namespace day20
 
 		return 0;
 	}
-}  // namespace day20
+} // namespace day20

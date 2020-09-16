@@ -6,4 +6,4 @@ namespace day5
 {
 	int64_t part1();
 	int64_t part2();
-}  // namespace day5
+} // namespace day5

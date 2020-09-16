@@ -78,4 +78,4 @@ namespace day23
 
 		return regB;
 	}
-}  // namespace day23
+} // namespace day23

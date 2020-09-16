@@ -77,4 +77,4 @@ namespace day9
 
 		return result;
 	}
-}  // namespace day9
+} // namespace day9

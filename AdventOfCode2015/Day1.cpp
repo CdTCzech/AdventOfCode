@@ -38,4 +38,4 @@ namespace day1
 
 		return result + 1;
 	}
-}  // namespace day1
+} // namespace day1

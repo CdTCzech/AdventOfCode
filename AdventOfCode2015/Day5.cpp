@@ -78,4 +78,4 @@ namespace day5
 
 		return result;
 	}
-}  // namespace day5
+} // namespace day5

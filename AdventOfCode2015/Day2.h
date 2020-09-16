@@ -13,4 +13,4 @@ namespace day2
 
 	int64_t part1();
 	int64_t part2();
-}  // namespace day2
+} // namespace day2

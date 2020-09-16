@@ -91,4 +91,4 @@ namespace day12
 
 		return result;
 	}
-}  // namespace day12
+} // namespace day12

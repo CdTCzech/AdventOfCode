@@ -85,4 +85,4 @@ namespace day19
 
 		return (total - ar - rn - 2 * y - 1);
 	}
-}  // namespace day19
+} // namespace day19

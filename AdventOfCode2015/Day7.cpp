@@ -79,4 +79,4 @@ namespace day7
 		instructions.at("b").push_back(std::to_string(part1Result));
 		return getResult("a", instructions, results);
 	}
-}  // namespace day7
+} // namespace day7

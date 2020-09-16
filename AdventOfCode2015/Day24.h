@@ -6,4 +6,4 @@ namespace day24
 {
 	int64_t part1();
 	int64_t part2();
-}  // namespace day24
+} // namespace day24

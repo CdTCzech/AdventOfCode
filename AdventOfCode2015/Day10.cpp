@@ -67,4 +67,4 @@ namespace day10
 
 		return result.size();
 	}
-}  // namespace day10
+} // namespace day10

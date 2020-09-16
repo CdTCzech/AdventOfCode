@@ -5,10 +5,10 @@
 #include <cstdint>
 #include <functional>
 #include <iostream>
+#include <numeric>
 #include <string>
 
 #include <Windows.h>
-
 
 namespace test
 {
@@ -96,4 +96,4 @@ namespace test
 
 		return allOk;
 	}
-}
+} // namespace test

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.25802.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30509.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventOfCode2015", "AdventOfCode2015\AdventOfCode2015.vcxproj", "{A449EDCF-64A1-4781-992D-9E10F8288C60}"
 EndProject

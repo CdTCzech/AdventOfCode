@@ -50,4 +50,4 @@ namespace day2
 
 		return result;
 	}
-}  // namespace day2
+} // namespace day2

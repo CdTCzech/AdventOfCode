@@ -51,4 +51,4 @@ namespace day3
 
 		return points.size();
 	}
-}  // namespace day3
+} // namespace day3

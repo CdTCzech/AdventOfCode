@@ -44,4 +44,4 @@ namespace day8
 
 		return result;
 	}
-}  // namespace day8
+} // namespace day8

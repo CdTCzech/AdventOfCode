@@ -5,4 +5,4 @@
 namespace day25
 {
 	int64_t part1();
-}  // namespace day25
+} // namespace day25

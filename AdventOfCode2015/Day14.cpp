@@ -2,8 +2,8 @@
 
 #include "FileReader.h"
 
-#include "iterator"
-#include "sstream"
+#include <iterator>
+#include <sstream>
 
 namespace day14
 {
@@ -70,4 +70,4 @@ namespace day14
 		for (auto& reindeer : reindeers) if (reindeer.points > maximum) maximum = reindeer.points;
 		return maximum;
 	}
-}  // namespace day14
+} // namespace day14

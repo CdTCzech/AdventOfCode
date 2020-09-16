@@ -72,4 +72,4 @@ namespace day17
 
 		return result;
 	}
-}  // namespace day17
+} // namespace day17

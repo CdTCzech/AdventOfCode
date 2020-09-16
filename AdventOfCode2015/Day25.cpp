@@ -21,4 +21,4 @@ namespace day25
 
 		return result;
 	}
-}  // namespace day25
+} // namespace day25

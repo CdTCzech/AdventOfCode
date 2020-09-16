@@ -1,7 +1,7 @@
 #pragma once
 
-#include <map>
 #include <cstdint>
+#include <map>
 #include <string>
 
 namespace day13
@@ -14,4 +14,4 @@ namespace day13
 
 	int64_t part1();
 	int64_t part2();
-}  // namespace day13
+} // namespace day13

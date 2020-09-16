@@ -101,4 +101,4 @@ namespace day6
 
 		return result;
 	}
-}  // namespace day6
+} // namespace day6
