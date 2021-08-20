@@ -1,6 +1,6 @@
 #include "Day11.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 namespace day11
 {
@@ -19,7 +19,7 @@ namespace day11
 
 	std::string part1()
 	{
-		auto line = getLine("day11.txt");
+		auto line = getLine("Days\\day11.txt");
 
 		auto increasing = false;
 		auto banned = false;

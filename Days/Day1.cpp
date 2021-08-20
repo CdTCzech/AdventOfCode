@@ -1,12 +1,12 @@
 #include "Day1.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 namespace day1
 {
 	int64_t part1()
 	{
-		const auto& line = getLine("day1.txt");
+		const auto& line = getLine("Days\\day1.txt");
 		int64_t result = 0;
 
 		for (auto character : line)
@@ -20,7 +20,7 @@ namespace day1
 
 	int64_t part2()
 	{
-		const auto& line = getLine("day1.txt");
+		const auto& line = getLine("Days\\day1.txt");
 		int floor = 0;
 		int64_t result = 0;
 

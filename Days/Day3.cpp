@@ -1,6 +1,6 @@
 #include "Day3.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <set>
 
@@ -11,7 +11,7 @@ namespace day3
 		Point currentPosition{ 0, 0 };
 		std::set<Point> points;
 
-		const auto& line = getLine("day3.txt");
+		const auto& line = getLine("Days\\day3.txt");
 		for (auto character : line)
 		{
 			points.insert(currentPosition);
@@ -32,7 +32,7 @@ namespace day3
 		Point* current;
 		std::set<Point> points;
 
-		const auto& line = getLine("day3.txt");
+		const auto& line = getLine("Days\\day3.txt");
 		auto isSantaTurn = true;
 		for (auto character : line)
 		{

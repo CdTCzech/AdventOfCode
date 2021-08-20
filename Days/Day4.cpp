@@ -1,14 +1,14 @@
 #include "Day4.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
-#include "Libraries/md5.h"
+#include "../Libraries/md5.h"
 
 namespace day4
 {
 	int64_t part1()
 	{
-		const auto& line = getLine("day4.txt");
+		const auto& line = getLine("Days\\day4.txt");
 		for (unsigned int number = 0; number < 1000000; ++number)
 		{
 			auto hash = md5(line + std::to_string(number));
@@ -22,7 +22,7 @@ namespace day4
 
 	int64_t part2()
 	{
-		const auto& line = getLine("day4.txt");
+		const auto& line = getLine("Days\\day4.txt");
 		for (unsigned int number = 282749; number < 10000000; ++number)
 		{
 			auto hash = md5(line + std::to_string(number));

@@ -1,6 +1,6 @@
 #include "Day5.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 namespace day5
 {
@@ -8,7 +8,7 @@ namespace day5
 	{
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<std::string>("day5.txt", [](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("Days\\day5.txt", [](std::string& var) { return var; }))
 		{
 			auto vowels = 0;
 			auto twice = false;
@@ -42,7 +42,7 @@ namespace day5
 	{
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<std::string>("day5.txt", [](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("Days\\day5.txt", [](std::string& var) { return var; }))
 		{
 			auto pair = false;
 			auto between = false;

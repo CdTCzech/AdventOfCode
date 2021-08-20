@@ -1,6 +1,6 @@
 #include "Day18.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <array>
 
@@ -28,7 +28,7 @@ namespace day18
 
 		size_t lineNumber = 1;
 
-		for (const auto& line : getLineByLine<std::string>("day18.txt", [](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("Days\\day18.txt", [](std::string& var) { return var; }))
 		{
 			for (size_t i = 0; i < line.size(); ++i) one[lineNumber][i + 1] = line[i];
 			++lineNumber;
@@ -102,7 +102,7 @@ namespace day18
 
 		size_t lineNumber = 1;
 
-		for (const auto& line : getLineByLine<std::string>("day18.txt", [](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("Days\\day18.txt", [](std::string& var) { return var; }))
 		{
 			for (size_t i = 0; i < line.size(); ++i) one[lineNumber][i + 1] = line[i];
 			++lineNumber;

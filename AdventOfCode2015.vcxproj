@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,34 +20,35 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{A449EDCF-64A1-4781-992D-9E10F8288C60}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{d5b9bc4d-223b-4578-9ae7-0294a695143b}</ProjectGuid>
     <RootNamespace>AdventOfCode2015</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -69,106 +70,133 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AdventOfCode2015.cpp" />
-    <ClCompile Include="Day1.cpp" />
-    <ClCompile Include="Day10.cpp" />
-    <ClCompile Include="Day11.cpp" />
-    <ClCompile Include="Day12.cpp" />
-    <ClCompile Include="Day13.cpp" />
-    <ClCompile Include="Day14.cpp" />
-    <ClCompile Include="Day15.cpp" />
-    <ClCompile Include="Day16.cpp" />
-    <ClCompile Include="Day17.cpp" />
-    <ClCompile Include="Day18.cpp" />
-    <ClCompile Include="Day19.cpp" />
-    <ClCompile Include="Day2.cpp" />
-    <ClCompile Include="Day20.cpp" />
-    <ClCompile Include="Day21.cpp" />
-    <ClCompile Include="Day22.cpp" />
-    <ClCompile Include="Day23.cpp" />
-    <ClCompile Include="Day24.cpp" />
-    <ClCompile Include="Day25.cpp" />
-    <ClCompile Include="Day3.cpp" />
-    <ClCompile Include="Day4.cpp" />
-    <ClCompile Include="Day5.cpp" />
-    <ClCompile Include="Day6.cpp" />
-    <ClCompile Include="Day7.cpp" />
-    <ClCompile Include="Day8.cpp" />
-    <ClCompile Include="Day9.cpp" />
+    <ClCompile Include="Days\Day1.cpp" />
+    <ClCompile Include="Days\Day10.cpp" />
+    <ClCompile Include="Days\Day11.cpp" />
+    <ClCompile Include="Days\Day12.cpp" />
+    <ClCompile Include="Days\Day13.cpp" />
+    <ClCompile Include="Days\Day14.cpp" />
+    <ClCompile Include="Days\Day15.cpp" />
+    <ClCompile Include="Days\Day16.cpp" />
+    <ClCompile Include="Days\Day17.cpp" />
+    <ClCompile Include="Days\Day18.cpp" />
+    <ClCompile Include="Days\Day19.cpp" />
+    <ClCompile Include="Days\Day2.cpp" />
+    <ClCompile Include="Days\Day20.cpp" />
+    <ClCompile Include="Days\Day21.cpp" />
+    <ClCompile Include="Days\Day22.cpp" />
+    <ClCompile Include="Days\Day23.cpp" />
+    <ClCompile Include="Days\Day24.cpp" />
+    <ClCompile Include="Days\Day25.cpp" />
+    <ClCompile Include="Days\Day3.cpp" />
+    <ClCompile Include="Days\Day4.cpp" />
+    <ClCompile Include="Days\Day5.cpp" />
+    <ClCompile Include="Days\Day6.cpp" />
+    <ClCompile Include="Days\Day7.cpp" />
+    <ClCompile Include="Days\Day8.cpp" />
+    <ClCompile Include="Days\Day9.cpp" />
     <ClCompile Include="Libraries\md5.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Day1.h" />
-    <ClInclude Include="Day10.h" />
-    <ClInclude Include="Day11.h" />
-    <ClInclude Include="Day12.h" />
-    <ClInclude Include="Day13.h" />
-    <ClInclude Include="Day14.h" />
-    <ClInclude Include="Day15.h" />
-    <ClInclude Include="Day16.h" />
-    <ClInclude Include="Day17.h" />
-    <ClInclude Include="Day18.h" />
-    <ClInclude Include="Day19.h" />
-    <ClInclude Include="Day2.h" />
-    <ClInclude Include="Day20.h" />
-    <ClInclude Include="Day21.h" />
-    <ClInclude Include="Day22.h" />
-    <ClInclude Include="Day23.h" />
-    <ClInclude Include="Day24.h" />
-    <ClInclude Include="Day25.h" />
-    <ClInclude Include="Day3.h" />
-    <ClInclude Include="Day4.h" />
-    <ClInclude Include="Day5.h" />
-    <ClInclude Include="Day6.h" />
-    <ClInclude Include="Day7.h" />
-    <ClInclude Include="Day8.h" />
-    <ClInclude Include="Day9.h" />
+    <ClInclude Include="Days\Day1.h" />
+    <ClInclude Include="Days\Day10.h" />
+    <ClInclude Include="Days\Day11.h" />
+    <ClInclude Include="Days\Day12.h" />
+    <ClInclude Include="Days\Day13.h" />
+    <ClInclude Include="Days\Day14.h" />
+    <ClInclude Include="Days\Day15.h" />
+    <ClInclude Include="Days\Day16.h" />
+    <ClInclude Include="Days\Day17.h" />
+    <ClInclude Include="Days\Day18.h" />
+    <ClInclude Include="Days\Day19.h" />
+    <ClInclude Include="Days\Day2.h" />
+    <ClInclude Include="Days\Day20.h" />
+    <ClInclude Include="Days\Day21.h" />
+    <ClInclude Include="Days\Day22.h" />
+    <ClInclude Include="Days\Day23.h" />
+    <ClInclude Include="Days\Day24.h" />
+    <ClInclude Include="Days\Day25.h" />
+    <ClInclude Include="Days\Day3.h" />
+    <ClInclude Include="Days\Day4.h" />
+    <ClInclude Include="Days\Day5.h" />
+    <ClInclude Include="Days\Day6.h" />
+    <ClInclude Include="Days\Day7.h" />
+    <ClInclude Include="Days\Day8.h" />
+    <ClInclude Include="Days\Day9.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Libraries\md5.h" />
     <ClInclude Include="Test.h" />

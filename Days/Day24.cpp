@@ -1,6 +1,6 @@
 #include "Day24.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <algorithm>
 #include <numeric>
@@ -82,7 +82,7 @@ namespace day24
 	{
 		std::vector<int64_t> packages;
 		std::vector<std::tuple<int64_t, std::vector<int64_t>>> subsets;
-		for (const auto& line : getLineByLine<std::string>("day24.txt", [](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("Days\\day24.txt", [](std::string& var) { return var; }))
 		{
 			packages.push_back(std::stoul(line));
 		}

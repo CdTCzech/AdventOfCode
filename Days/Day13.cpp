@@ -1,6 +1,6 @@
 #include "Day13.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <algorithm>
 #include <iterator>
@@ -15,7 +15,7 @@ namespace day13
 		std::map<std::string, Person> persons;
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day13.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("Days\\day13.txt", [](std::string& var)
 		{
 			var[var.size() - 1] = ' ';
 			std::istringstream iss(var);
@@ -56,7 +56,7 @@ namespace day13
 		std::map<std::string, Person> persons;
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day13.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("Days\\day13.txt", [](std::string& var)
 		{
 			var[var.size() - 1] = ' ';
 			std::istringstream iss(var);

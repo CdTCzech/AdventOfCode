@@ -1,12 +1,12 @@
 #include "Day10.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 namespace day10
 {
 	int64_t part1()
 	{
-		const auto& line = getLine("day10.txt");
+		const auto& line = getLine("Days\\day10.txt");
 		auto temp = line;
 		std::string result;
 
@@ -38,7 +38,7 @@ namespace day10
 
 	int64_t part2()
 	{
-		const auto& line = getLine("day10.txt");
+		const auto& line = getLine("Days\\day10.txt");
 		auto temp = line;
 		std::string result;
 

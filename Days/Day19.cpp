@@ -1,6 +1,6 @@
 #include "Day19.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <iterator>
 #include <map>
@@ -14,7 +14,7 @@ namespace day19
 		std::map<std::string, std::vector<std::string>> replacements;
 		std::set<std::string> result;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day19_1.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("Days\\day19_1.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
@@ -25,7 +25,7 @@ namespace day19
 			else replacements.at(line[0]).push_back(line[2]);
 		}
 
-		auto line = getLine("day19_2.txt");
+		auto line = getLine("Days\\day19_2.txt");
 
 		for (size_t i = 0; i < line.size() - 1; ++i)
 		{
@@ -68,7 +68,7 @@ namespace day19
 
 	int64_t part2()
 	{
-		auto line = getLine("day19_2.txt");
+		auto line = getLine("Days\\day19_2.txt");
 
 		auto total = 0;
 		for (auto& element : line) if (element >= 'A' && element <= 'Z') ++total;

@@ -1,6 +1,6 @@
 #include "Day15.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <algorithm>
 #include <iterator>
@@ -13,7 +13,7 @@ namespace day15
 		std::vector<Cookie> cookies;
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<Cookie>("day15.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Cookie>("Days\\day15.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);
@@ -54,7 +54,7 @@ namespace day15
 		std::vector<Cookie> cookies;
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<Cookie>("day15.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Cookie>("Days\\day15.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);

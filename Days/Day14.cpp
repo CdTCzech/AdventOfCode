@@ -1,6 +1,6 @@
 #include "Day14.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <iterator>
 #include <sstream>
@@ -12,7 +12,7 @@ namespace day14
 		const auto time = 2503;
 		int64_t maximal = 0;
 
-		for (const auto& line : getLineByLine<ReindeerStats>("day14.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<ReindeerStats>("Days\\day14.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
@@ -37,7 +37,7 @@ namespace day14
 	{
 		std::vector<AdvancedReindeerStats> reindeers;
 
-		for (const auto& line : getLineByLine<AdvancedReindeerStats>("day14.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<AdvancedReindeerStats>("Days\\day14.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			std::vector<std::string> splitted(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});

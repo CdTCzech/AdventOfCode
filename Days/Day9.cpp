@@ -1,6 +1,6 @@
 #include "Day9.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <algorithm>
 #include <iterator>
@@ -13,7 +13,7 @@ namespace day9
 		std::map<std::string, City> cities;
 		int64_t result = 4'294'967'295;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("Days\\day9.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});
@@ -48,7 +48,7 @@ namespace day9
 		std::map<std::string, City> cities;
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day9.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("Days\\day9.txt", [](std::string& var)
 		{
 			std::istringstream iss(var);
 			return std::vector<std::string>(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{});

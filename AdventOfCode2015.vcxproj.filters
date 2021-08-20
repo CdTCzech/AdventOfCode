@@ -3,118 +3,115 @@
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\MD5">
-      <UniqueIdentifier>{0126b431-8f4d-46c1-8c8a-b17da6548747}</UniqueIdentifier>
+    <Filter Include="Header Files\Days">
+      <UniqueIdentifier>{a6fe1573-e121-485f-8f29-91ffef3e5015}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\MD5">
-      <UniqueIdentifier>{f18fd98e-147e-4b0a-a839-e52118e56452}</UniqueIdentifier>
+    <Filter Include="Header Files\Libraries">
+      <UniqueIdentifier>{6b3b84f6-287c-43cd-83f8-55dea8ca83c4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Days">
-      <UniqueIdentifier>{3d40ccc7-083a-4754-81e9-146987b8d2a2}</UniqueIdentifier>
+      <UniqueIdentifier>{582f5498-95b7-4643-80cb-36a3de996814}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Days">
-      <UniqueIdentifier>{82ce7366-9f4d-4c30-854d-66318d04c32d}</UniqueIdentifier>
+    <Filter Include="Source Files\Libraries">
+      <UniqueIdentifier>{930bf97b-70c0-4388-8ed7-b4f6925c051b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Libraries\md5.cpp">
-      <Filter>Source Files\MD5</Filter>
-    </ClCompile>
     <ClCompile Include="AdventOfCode2015.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Day1.cpp">
+    <ClCompile Include="Days\Day1.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day2.cpp">
+    <ClCompile Include="Days\Day2.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day3.cpp">
+    <ClCompile Include="Days\Day3.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day4.cpp">
+    <ClCompile Include="Days\Day4.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day5.cpp">
+    <ClCompile Include="Days\Day5.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day6.cpp">
+    <ClCompile Include="Days\Day6.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day7.cpp">
+    <ClCompile Include="Days\Day7.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day8.cpp">
+    <ClCompile Include="Days\Day8.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day9.cpp">
+    <ClCompile Include="Days\Day9.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day10.cpp">
+    <ClCompile Include="Days\Day10.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day11.cpp">
+    <ClCompile Include="Days\Day11.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day12.cpp">
+    <ClCompile Include="Days\Day12.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day13.cpp">
+    <ClCompile Include="Days\Day13.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day14.cpp">
+    <ClCompile Include="Days\Day14.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day15.cpp">
+    <ClCompile Include="Days\Day15.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day16.cpp">
+    <ClCompile Include="Days\Day16.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day17.cpp">
+    <ClCompile Include="Days\Day17.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day18.cpp">
+    <ClCompile Include="Days\Day18.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day19.cpp">
+    <ClCompile Include="Days\Day19.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day20.cpp">
+    <ClCompile Include="Days\Day20.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day21.cpp">
+    <ClCompile Include="Days\Day21.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day22.cpp">
+    <ClCompile Include="Days\Day22.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day23.cpp">
+    <ClCompile Include="Days\Day23.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day24.cpp">
+    <ClCompile Include="Days\Day24.cpp">
       <Filter>Source Files\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day25.cpp">
+    <ClCompile Include="Days\Day25.cpp">
       <Filter>Source Files\Days</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\md5.cpp">
+      <Filter>Source Files\Libraries</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileReader.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\md5.h">
-      <Filter>Header Files\MD5</Filter>
     </ClInclude>
     <ClInclude Include="Test.h">
       <Filter>Header Files</Filter>
@@ -122,80 +119,83 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Day1.h">
+    <ClInclude Include="Days\Day1.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day2.h">
+    <ClInclude Include="Days\Day2.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day3.h">
+    <ClInclude Include="Days\Day3.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day4.h">
+    <ClInclude Include="Days\Day4.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day5.h">
+    <ClInclude Include="Days\Day5.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day6.h">
+    <ClInclude Include="Days\Day6.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day7.h">
+    <ClInclude Include="Days\Day7.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day8.h">
+    <ClInclude Include="Days\Day8.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day9.h">
+    <ClInclude Include="Days\Day9.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day10.h">
+    <ClInclude Include="Days\Day10.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day11.h">
+    <ClInclude Include="Days\Day11.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day12.h">
+    <ClInclude Include="Days\Day12.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day13.h">
+    <ClInclude Include="Days\Day13.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day14.h">
+    <ClInclude Include="Days\Day14.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day15.h">
+    <ClInclude Include="Days\Day15.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day16.h">
+    <ClInclude Include="Days\Day16.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day17.h">
+    <ClInclude Include="Days\Day17.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day18.h">
+    <ClInclude Include="Days\Day18.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day19.h">
+    <ClInclude Include="Days\Day19.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day20.h">
+    <ClInclude Include="Days\Day20.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day21.h">
+    <ClInclude Include="Days\Day21.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day22.h">
+    <ClInclude Include="Days\Day22.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day23.h">
+    <ClInclude Include="Days\Day23.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day24.h">
+    <ClInclude Include="Days\Day24.h">
       <Filter>Header Files\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day25.h">
+    <ClInclude Include="Days\Day25.h">
       <Filter>Header Files\Days</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\md5.h">
+      <Filter>Header Files\Libraries</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

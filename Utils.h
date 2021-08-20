@@ -2,6 +2,9 @@
 
 #include <string>
 
+#define EXCEPTION(what) utils::AoCException(what, __FILE__, __LINE__)
+
+
 namespace utils
 {
 	class AoCException : public std::exception

@@ -1,6 +1,6 @@
 #include "Day2.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <algorithm>
 #include <sstream>
@@ -11,7 +11,7 @@ namespace day2
 	{
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Dimensions>("Days\\day2.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), 'x', ' ');
 			std::istringstream iss(var);
@@ -34,7 +34,7 @@ namespace day2
 	{
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<Dimensions>("day2.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Dimensions>("Days\\day2.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), 'x', ' ');
 			std::istringstream iss(var);

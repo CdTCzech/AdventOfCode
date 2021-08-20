@@ -1,6 +1,6 @@
 #include "Day17.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <algorithm>
 
@@ -26,7 +26,7 @@ namespace day17
 		std::vector<int> numbers;
 		std::vector<std::vector<int>> result;
 
-		for (const auto& line : getLineByLine<int>("day17.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<int>("Days\\day17.txt", [](std::string& var)
 		{
 			return std::stoi(var);
 		}))
@@ -49,7 +49,7 @@ namespace day17
 		std::vector<int> numbers;
 		std::vector<std::vector<int>> results;
 
-		for (const auto& line : getLineByLine<int>("day17.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<int>("Days\\day17.txt", [](std::string& var)
 		{
 			return std::stoi(var);
 		}))

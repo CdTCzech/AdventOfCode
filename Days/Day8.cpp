@@ -1,6 +1,6 @@
 #include "Day8.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 namespace day8
 {
@@ -8,7 +8,7 @@ namespace day8
 	{
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<std::string>("day8.txt", [](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("Days\\day8.txt", [](std::string& var) { return var; }))
 		{
 			result += line.size();
 
@@ -32,7 +32,7 @@ namespace day8
 	{
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<std::string>("day8.txt", [](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("Days\\day8.txt", [](std::string& var) { return var; }))
 		{
 			result += 2;
 

@@ -1,6 +1,6 @@
 #include "Day6.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <algorithm>
 #include <sstream>
@@ -12,7 +12,7 @@ namespace day6
 		std::vector<std::vector<bool>> grid(1000, std::vector<bool>(1000, false));
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<Command>("day6.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Command>("Days\\day6.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);
@@ -58,7 +58,7 @@ namespace day6
 		std::vector<std::vector<int>> grid(1000, std::vector<int>(1000, 0));
 		int64_t result = 0;
 
-		for (const auto& line : getLineByLine<Command>("day6.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<Command>("Days\\day6.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ',', ' ');
 			std::istringstream iss(var);

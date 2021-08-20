@@ -1,6 +1,6 @@
 #include "Day23.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 namespace day23
 {
@@ -8,7 +8,7 @@ namespace day23
 	{
 		std::vector<std::string> program;
 		size_t currentLine = 0;
-		for (const auto& line : getLineByLine<std::string>("day23.txt", [](std::string& var) { return var; }))
+		for (const auto& line : getLineByLine<std::string>("Days\\day23.txt", [](std::string& var) { return var; }))
 		{
 			program.push_back(line);
 		}

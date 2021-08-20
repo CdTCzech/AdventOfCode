@@ -1,6 +1,6 @@
 #include "Day16.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <algorithm>
 #include <iterator>
@@ -23,7 +23,7 @@ namespace day16
 		myAunt.insert({ "cars",			2 });
 		myAunt.insert({ "perfumes",		1 });
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day16.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("Days\\day16.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ':', ' ');
 			std::replace(var.begin(), var.end(), ',', ' ');
@@ -57,7 +57,7 @@ namespace day16
 		myAunt.insert({ "cars",			2 });
 		myAunt.insert({ "perfumes",		1 });
 
-		for (const auto& line : getLineByLine<std::vector<std::string>>("day16.txt", [](std::string& var)
+		for (const auto& line : getLineByLine<std::vector<std::string>>("Days\\day16.txt", [](std::string& var)
 		{
 			std::replace(var.begin(), var.end(), ':', ' ');
 			std::replace(var.begin(), var.end(), ',', ' ');

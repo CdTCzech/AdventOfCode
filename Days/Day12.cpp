@@ -1,6 +1,6 @@
 #include "Day12.h"
 
-#include "FileReader.h"
+#include "../FileReader.h"
 
 #include <map>
 
@@ -8,7 +8,7 @@ namespace day12
 {
 	int64_t part1()
 	{
-		const auto& line = getLine("day12.txt");
+		const auto& line = getLine("Days\\day12.txt");
 
 		int64_t result = 0;
 		std::string buffer;
@@ -30,7 +30,7 @@ namespace day12
 
 	int64_t part2()
 	{
-		const auto& line = getLine("day12.txt");
+		const auto& line = getLine("Days\\day12.txt");
 		std::map<size_t, size_t> toSkip;
 		int64_t result = 0;
 		std::string buffer;
